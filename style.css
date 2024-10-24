@@ -1,0 +1,78 @@
+.navbar {
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.logonavbar {
+    display: flex;
+    align-items: center;
+    width: 300px;
+}
+
+.logonavbar img {
+    width: 80px;
+}
+
+.logonavbar span {
+    padding-left: 20px;
+    font-size: 35px;
+}
+
+.itens span {
+    font-size: 150%;
+    color: #fff;
+}
+
+.itens {
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.botoes {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.30);
+    border-radius: 40px;
+    }
+
+.botao1 button {
+        background: none;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 20px 30px 20px 30px;
+        font-weight: 550;
+        font-size: 20px;
+        border-radius: 60px;
+    }
+    
+    .botao2 button {
+        background-color: #fff;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 20px 30px 20px 30px;
+        font-weight: 550;
+        font-size: 20px;
+        border-radius: 60px;
+}
+
+.botao2 a {
+    color: #519758;
+    text-decoration: none;
+}
+
+.botao1 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'League Spartan', sans-serif;
+    background-image: linear-gradient(45deg, #519758, #48674B); ;
+}
