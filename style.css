@@ -1,3 +1,25 @@
+body {
+    font-family: 'League Spartan', sans-serif;
+    background-image: linear-gradient(45deg, #519758, #48674B);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(./assets/2.png);
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    opacity: 0.025;
+}
+
 .navbar {
     color: white;
     display: flex;
@@ -20,6 +42,7 @@
 .logonavbar span {
     padding-left: 20px;
     font-size: 35px;
+    font-weight: 800;
 }
 
 .itens span {
@@ -72,7 +95,122 @@
     text-decoration: none;
 }
 
-body {
-    font-family: 'League Spartan', sans-serif;
-    background-image: linear-gradient(45deg, #519758, #48674B); ;
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.banner img {
+    width: 750px;
+}
+
+.banner .slogan span {
+    font-size: 150px;
+    color: #fff;
+    font-weight: 800;
+    
+}
+
+.banner .mensagem span {
+    font-size: 50px;
+    color: #fff;
+}
+
+.alinhar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.introducao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.introducao h1 {
+    color: #fff;
+    font-size: 70px;
+}
+
+.introducao span {
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    width: 55%;
+    font-weight:lighter;
+}
+
+.calc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    width: 200%;
+    padding: 50px;
+    height: 200px;
+}
+
+.calc h1 {
+    font-size: 55px;
+    color: #48674B;
+}
+
+.calc span {
+    font-size: 30px;
+    text-align: center;
+    width: 27%;
+    color: #48674B;
+}
+
+.calculadora {
+    display: flex;
+    
+}
+
+.calculadora .desc{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.calculadora .imgText{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+}
+
+.imgIMC img {
+    padding-bottom: 40px;
+}
+
+.calculadora span {
+    color: #fff;
+    font-size: 200px;
+    font-weight: 800;
+}
+
+.calculadora p {
+    color: #fff;
+    width:50%;
+    text-align: center;
+    font-size: 30px;
+}
+
+.botaoTroca button {
+    color: #fff;
+    font-size: 100px;
+    background: none;
+    border: none;
 }
