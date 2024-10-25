@@ -146,15 +146,20 @@ body::before {
     font-weight:lighter;
 }
 
+.calculadoras {
+    display: flex;
+    flex-direction: row;
+}
+
 .calc {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    width: 200%;
+    width: 96%;
     padding: 50px;
-    height: 200px;
+    height: 300px;
 }
 
 .calc h1 {
@@ -165,7 +170,7 @@ body::before {
 .calc span {
     font-size: 30px;
     text-align: center;
-    width: 27%;
+    width: 60%;
     color: #48674B;
 }
 
@@ -178,7 +183,7 @@ body::before {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: 80%;
     align-items: center;
 }
 
@@ -191,13 +196,14 @@ body::before {
 
 }
 
-.imgIMC img {
+.calculadora img {
+    width: 400px;
     padding-bottom: 40px;
 }
 
 .calculadora span {
     color: #fff;
-    font-size: 200px;
+    font-size: 150px;
     font-weight: 800;
 }
 
@@ -206,11 +212,4 @@ body::before {
     width:50%;
     text-align: center;
     font-size: 30px;
-}
-
-.botaoTroca button {
-    color: #fff;
-    font-size: 100px;
-    background: none;
-    border: none;
 }
