@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriLab</title>
+    <link rel="icon" href="./assets/2.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logonavbar">
+            <img src="./assets/2.png" alt=""> <span>NutriLab</span>
+        </div>
+
+        <div class="itens">
+            <a href=""><span>Sobre</span></a>
+            <a href=""><span>Calculadoras</span></a>
+            <a href=""><span>Contato</span></a>
+        </div>
+
+        <div class="botoes">
+            <div class="botao2">
+                <button onclick="login()">
+                    <a href=""><span>Perfil</span></a>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="calculadorafixa">
+
+        <h1>Taxa Metabólica Basal (TMB)</h1>
+        <span>A Taxa Metabólica Basal (TMB) é a quantidade de energia (calorias) que o corpo precisa para realizar suas
+            funções básicas enquanto está em repouso. Essas funções incluem respiração, circulação sanguínea, regulação
+            da temperatura corporal, funcionamento dos órgãos e manutenção das células. Em outras palavras, a TMB
+            representa a quantidade mínima de calorias que o corpo gasta para se manter vivo e funcional, sem incluir
+            atividades físicas ou digestão de alimentos</span>
+
+        <div class="containerlec">
+
+            <h1>Calcule sua TMB aqui!</h1>
+
+            <div class="inputsimc">
+                <span>Escolha seu sexo biológico:</span>
+                <select id="slt_faixa">
+                    <option value="#">Selecione um</option>
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                </select>
+                <span>Insira sua idade:</span>
+                <input type="number">
+                <span>Insira seu peso:</span>
+                <input type="number">
+
+            </div>
+
+            <button onclick="calcular()"> Calcular </button>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+
+        <img src="./assets/2.png" alt="" style="width: 100px;">
+        <span> © 2024 NutriLab All Rights Reserved </span>
+
+    </div>
+
+</body>
+
+</html>

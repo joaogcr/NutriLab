@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriLab</title>
+    <link rel="icon" href="./assets/2.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logonavbar">
+            <img src="./assets/2.png" alt=""> <span>NutriLab</span>
+        </div>
+
+        <div class="itens">
+            <a href=""><span>Sobre</span></a>
+            <a href=""><span>Calculadoras</span></a>
+            <a href=""><span>Contato</span></a>
+        </div>
+
+        <div class="botoes">
+            <div class="botao2">
+                <button onclick="login()">
+                    <a href=""><span>Perfil</span></a>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="calculadorafixa" id="div_calculadora">
+
+        <h1>Índice de Massa Corporal (IMC)</h1>
+        <span>O IMC (Índice de Massa Corporal) é uma medida usada para avaliar se uma pessoa está dentro de um peso
+            considerado saudável em relação à sua altura. Ele é calculado dividindo o peso (em quilogramas) pela
+            altura (em metros) ao quadrado. Embora o IMC seja amplamente utilizado, ele não leva em consideração a
+            composição corporal, como a proporção entre gordura e músculo, nem fatores como idade, sexo ou nível de
+            atividade física.</span>
+
+        <div class="containerlec">
+
+            <h1>Calcule seu IMC aqui!</h1>
+
+            <div class="inputsimc">
+                <span>Insira seu peso:</span>
+                <input type="number" id="ipt_peso">
+                <span>Insira sua altura</span>
+                <input type="number" id="ipt_altura">
+            </div>
+
+            <button onclick="calcular()"> Calcular </button>
+
+        </div>
+
+    </div>
+
+    <div class="resultadoimc" id="div_resultado">
+    </div>
+
+    <div class="footer">
+
+        <img src="./assets/2.png" alt="" style="width: 100px;">
+        <span> © 2024 NutriLab All Rights Reserved </span>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    function calcular() {
+
+        div_calculadora.style.display = "none";
+        div_resultado.style.display = "flex";
+
+        var mensagem = ``;
+        var peso = Number(ipt_peso.value);
+        var altura = Number(ipt_altura.value);
+        var imc = peso / (altura * altura);
+
+        if (peso <= 0 || altura <= 0) {
+            alert("Insira dados válidos")
+            return null
+        }
+
+        else if (imc < 18.5) {
+            mensagem = `
+        <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
+
+        <span>
+            <b>Abaixo do peso (IMC < 18,5)</b>
+                    Descrição: Indica que a pessoa está com peso corporal insuficiente em relação à altura. Pode ser um
+                    sinal de desnutrição, deficiências nutricionais ou problemas de saúde subjacentes, como distúrbios
+                    alimentares ou doenças crônicas. <br> <br>
+                    <b>Riscos à saúde:</b> Comprometimento do sistema imunológico, maior risco de osteoporose, fraqueza,
+                    fadiga, infertilidade, e dificuldades para realizar atividades físicas.
+        </span>
+
+        <img src="./assets/imc-removebg-preview.png" alt="">
+        <img src="./assets/termometroimc.png" alt="">
+            `;
+        }
+
+        else if (imc >= 18.5 && imc <= 24.9) {
+            mensagem = `
+        <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
+
+        <span>
+            <b>Peso normal (IMC 18,5 – 24,9)</b>
+            Descrição: Considerado o intervalo de peso saudável para a maioria das pessoas. Esse peso está geralmente
+            associado a um equilíbrio entre a ingestão de calorias e o gasto energético. <br> <br>
+            <b>Riscos à saúde:</b> O risco de desenvolver doenças crônicas relacionadas ao peso é menor, embora outros
+            fatores,
+            como genética e estilo de vida, ainda desempenhem um papel importante.
+        </span>
+
+        <img src="./assets/imc-removebg-preview.png" alt="">
+        <img src="./assets/termometroimc.png" alt="">
+            `;
+        }
+
+        else if (imc >= 25 && imc <= 29.9) {
+            mensagem = `
+        <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
+
+        <span>
+            <b>Sobrepeso (IMC 25,0 – 29,9)</b>
+            Descrição: Indica que a pessoa está com excesso de peso em relação à sua altura, o que pode ser causado por
+            excesso de gordura corporal ou massa muscular. No entanto, o sobrepeso pode aumentar o risco de doenças
+            crônicas. <br> <br>
+            <b>Riscos à saúde:</b> Maior risco de desenvolver condições como hipertensão, colesterol elevado, doenças
+            cardiovasculares e diabetes tipo 2. Pode haver mais pressão sobre as articulações, aumentando o risco de
+            osteoartrite.
+        </span>
+
+        <img src="./assets/imc-removebg-preview.png" alt="">
+        <img src="./assets/termometroimc.png" alt="">            
+            `;
+        }
+
+        else if (imc >= 30 && imc <= 34.9) {
+            mensagem = `
+        <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
+
+        <span>
+            <b>Obesidade grau I (IMC 30,0 – 34,9)</b>
+            Descrição: Primeiro estágio da obesidade, em que o acúmulo de gordura corporal já está em níveis que começam
+            a afetar a saúde. Nesse estágio, a obesidade começa a impactar significativamente o bem-estar e a qualidade
+            de vida. <br> <br>
+            <b>Riscos à saúde:</b> Risco elevado de doenças cardíacas, diabetes tipo 2, apneia do sono, doenças
+            hepáticas
+            gordurosas, inflamação crônica e problemas articulares.
+        </span>
+
+        <img src="./assets/imc-removebg-preview.png" alt="">
+        <img src="./assets/termometroimc.png" alt="">            
+            `;
+        }
+
+        else if (imc >= 35 && imc <= 39.9) {
+            mensagem = `
+        <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
+
+        <span>
+            <b>Obesidade grau II (IMC 35,0 – 39,9)</b>
+            Descrição: Fase mais avançada da obesidade, onde o excesso de peso está relacionado a um aumento
+            significativo no risco de desenvolver doenças graves e crônicas. Pode prejudicar as atividades diárias e a
+            mobilidade. <br> <br>
+            <b>Riscos à saúde:</b> Risco muito elevado de diabetes tipo 2, doenças cardiovasculares graves, hipertensão,
+            apneia
+            do sono, complicações respiratórias, problemas renais, além de impacto na saúde mental, como baixa
+            autoestima e depressão.
+        </span>
+
+        <img src="./assets/imc-removebg-preview.png" alt="">
+        <img src="./assets/termometroimc.png" alt="">            
+            `;
+        }
+
+        else {
+            mensagem = `        
+        <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
+
+        <span>
+            <b>Obesidade grau III ou obesidade mórbida (IMC ≥ 40,0)</b>
+            Descrição: Esse estágio é considerado obesidade severa ou extrema. O acúmulo excessivo de gordura nesse
+            nível representa uma ameaça direta à vida e geralmente requer intervenção médica. <br> <br>
+            <b>Riscos à saúde:</b> Risco extremamente alto de problemas de saúde graves, incluindo insuficiência cardíaca,
+            doenças coronárias, diabetes tipo 2 grave, doenças hepáticas, hipertensão severa, dificuldades respiratórias
+            graves (como a síndrome de hipoventilação da obesidade), e cânceres relacionados à obesidade. Também pode
+            levar à diminuição da mobilidade e limitações funcionais.
+        </span>
+
+        <img src="./assets/imc-removebg-preview.png" alt="">
+        <img src="./assets/termometroimc.png" alt="">
+            `;
+        }
+
+        div_resultado.innerHTML = mensagem;
+    }
+
+
+
+
+</script>
