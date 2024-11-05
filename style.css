@@ -160,12 +160,13 @@ body {
     width: 63%;
     padding: 100px;
     border-radius: 20px;
-    height: 300px;
+    height: 200px;
 }
 
 .calc h1 {
     font-size: 55px;
     color: #519758;
+    margin-top: 0%;
 }
 
 .calc span {
@@ -179,19 +180,37 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: column;
-    width: 100%;
+    width: 75%;
     gap: 20px;
     padding: 20px;
 }
 
-.imgCalc img {
+.imgCalc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 50%;
 }
 
+.imgCalc img {
+    width: 100%;
+}
+
 .imgCalc h1 {
+    font-size: 35px;
     color: #fff;
 }
+
+.descCalc {
+    width: 50%;
+    font-size: 25px;
+    color: #519758;
+    display: flex;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+} 
 
 .title {
     width: 80%;
