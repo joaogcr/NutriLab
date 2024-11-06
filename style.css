@@ -333,6 +333,7 @@ body {
 }
 
 .campos button {
+    cursor: pointer;
     border: none;
     background-image: linear-gradient(45deg, #519758, #48674B);
     width: 71%;
@@ -375,6 +376,8 @@ body {
     width: 350px;
 }
 
+
+
 .inputs {
     display: flex;
     flex-direction: column;
@@ -396,11 +399,14 @@ body {
 }
 
 .home {
+    cursor: pointer;
     border: none;
     border-radius: 12px;
+    width: 65%;
     padding: 10px;
     font-size: 20px;
     margin-top: 20px;
+    font-weight: 600;
     color: #519758;
 }
 
@@ -417,6 +423,18 @@ body {
 }
 
 .camposcadastro button {
+    cursor: pointer;
+    border: none;
+    background-image: linear-gradient(45deg, #519758, #48674B);
+    width: 71%;
+    border-radius: 20px;
+    height: 50px;
+    color: #fff;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.botaocadastro {
     border: none;
     background-image: linear-gradient(45deg, #519758, #48674B);
     width: 71%;
@@ -493,13 +511,13 @@ body {
     color: #48674B;
 }
 
-.containerlec button {
+.containerlec .home button {
     border: none;
-    background-image: linear-gradient(45deg, #519758, #48674B);
-    width: 50%;
+    background-image: #fff;
+    width: 71%;
     border-radius: 20px;
     height: 50px;
-    color: #fff;
+    color: #519758;
     margin-top: 10px;
     font-weight: 600;
     font-size: 20px;
