@@ -28,7 +28,7 @@
         <div class="botoes">
             <div class="botao2">
                 <button onclick="login()">
-                    <a href=""><span>Login</span></a>
+                    <a href="./login.html"><span>Login</span></a>
                 </button>
             </div>
 
@@ -66,7 +66,7 @@
 
                     <button class="botaocadastro" onclick="cadastrar()"> Cadastrar </button>
 
-                    <span class="pergunta">Já possui uma conta? <a href=""><b
+                    <span class="pergunta">Já possui uma conta? <a href="./login.html"><b
                                 style="color: #519758;">Login</b></a></span>
 
                 </div>
@@ -77,7 +77,7 @@
                 <img src="./assets/2.png" alt="">
                 <span class="titulo">NutriLab</span>
                 <span>Saúde em cada refeição</span>
-                <button class="home"> Home </button>
+                <button onclick="home()" class="home"> Home </button>
             </div>
 
         </div>
@@ -90,3 +90,11 @@
         </div>
 
     </div>
+
+    <script>
+
+        function home() {
+            window.location.href = 'index.html'
+        }
+
+    </script>

@@ -356,6 +356,11 @@ body {
     height: 700px;
 }
 
+/* html {
+    scroll-behavior: smooth;
+} */
+
+
 .apresentacao .titulo {
     color: #fff;
     font-weight: 600;
