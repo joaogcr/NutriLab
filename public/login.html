@@ -20,11 +20,7 @@
             <img src="./assets/2.png" alt=""> <span>NutriLab</span>
         </div>
 
-        <div class="itens">
-            <a href=""><span>Sobre</span></a>
-            <a href=""><span>Calculadoras</span></a>
-            <a href=""><span>Contato</span></a>
-        </div>
+
 
         <div class="botoes">
             <div class="botao2">
@@ -109,17 +105,23 @@
     function entrar() {
         aguardar();
 
+        mensagem_erro.innerHTML = ""
+
         var emailVar = ipt_email.value;
         var senhaVar = ipt_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Preencha todos os campos";
+            mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Preencha todos os campos`;
+            
             finalizarAguardar();
+            setTimeout(sumirMensagem, 2000);
             return false;
+
+            
         }
         else {
-            setInterval(sumirMensagem, 5000)
+            setInterval(sumirMensagem, 2000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -149,6 +151,9 @@
                     sessionStorage.DATA_USUARIO = json.data;
                     sessionStorage.ID_USUARIO = json.id
 
+                    cardErro.style.display = "flex"
+                    mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Login realizado com sucesso! Redirecionando para a tela de perfil`
+
                     setTimeout(function () {
                         window.location.href = "./perfil.html";
                     }, 1000); // apenas para exibir o loading
@@ -156,6 +161,9 @@
                 });
 
             } else {
+
+                cardErro.style.display = "flex"
+                mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Houve um erro ao tentar realizar o login`
 
                 console.log("Houve um erro ao tentar realizar o login!");
 

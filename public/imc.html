@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriLab</title>
     <link rel="icon" href="./assets/2.png" type="image/x-icon">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
@@ -20,22 +20,21 @@
         </div>
 
         <div class="itens">
-            <a href=""><span>Sobre</span></a>
-            <a href=""><span>Calculadoras</span></a>
-            <a href=""><span>Contato</span></a>
+            <a href="./imc.html"><span>IMC</span></a>
+            <a href="./tmb.html"><span>TMB</span></a>
+            <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
         </div>
 
         <div class="botoes">
             <div class="botao2">
-                <button onclick="login()">
-                    <a href=""><span>Perfil</span></a>
+                <button>
+                    <a href="./perfil.html"><span>Perfil</span></a>
                 </button>
             </div>
 
         </div>
 
     </div>
-
 
     <div class="calculadorafixa" id="div_calculadora">
 
@@ -57,7 +56,7 @@
                 <input type="number" id="ipt_altura">
             </div>
 
-            <button onclick="calcular()"> Calcular </button>
+            <button class="botaocalc" onclick="calcular()"> Calcular </button>
 
         </div>
 
@@ -81,9 +80,6 @@
 
     function calcular() {
 
-        div_calculadora.style.display = "none";
-        div_resultado.style.display = "flex";
-
         var mensagem = ``;
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
@@ -91,11 +87,16 @@
 
         if (peso <= 0 || altura <= 0) {
             alert("Insira dados válidos")
-            return null
+            return false
         }
 
-        else if (imc < 18.5) {
-            mensagem = `
+        else {
+
+            div_calculadora.style.display = "none";
+            div_resultado.style.display = "flex";
+
+            if (imc < 18.5) {
+                mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -108,12 +109,17 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt="">
+        <img src="./assets/termometroimc.png" alt=""> <br>
+            <button>
+                <a href="./imc.html">
+                    Voltar
+                </a>
+            </button>
             `;
-        }
+            }
 
-        else if (imc >= 18.5 && imc <= 24.9) {
-            mensagem = `
+            else if (imc >= 18.5 && imc <= 24.9) {
+                mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -126,12 +132,17 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt="">
+        <img src="./assets/termometroimc.png" alt=""> <br>
+            <button>
+                <a href="./imc.html">
+                     Voltar
+                </a>
+            </button>
             `;
-        }
+            }
 
-        else if (imc >= 25 && imc <= 29.9) {
-            mensagem = `
+            else if (imc >= 25 && imc <= 29.9) {
+                mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -147,10 +158,10 @@
         <img src="./assets/imc-removebg-preview.png" alt="">
         <img src="./assets/termometroimc.png" alt="">            
             `;
-        }
+            }
 
-        else if (imc >= 30 && imc <= 34.9) {
-            mensagem = `
+            else if (imc >= 30 && imc <= 34.9) {
+                mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -166,10 +177,10 @@
         <img src="./assets/imc-removebg-preview.png" alt="">
         <img src="./assets/termometroimc.png" alt="">            
             `;
-        }
+            }
 
-        else if (imc >= 35 && imc <= 39.9) {
-            mensagem = `
+            else if (imc >= 35 && imc <= 39.9) {
+                mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -186,10 +197,10 @@
         <img src="./assets/imc-removebg-preview.png" alt="">
         <img src="./assets/termometroimc.png" alt="">            
             `;
-        }
+            }
 
-        else {
-            mensagem = `        
+            else {
+                mensagem = `        
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -205,6 +216,8 @@
         <img src="./assets/imc-removebg-preview.png" alt="">
         <img src="./assets/termometroimc.png" alt="">
             `;
+            }
+
         }
 
         div_resultado.innerHTML = mensagem;

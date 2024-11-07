@@ -8,6 +8,26 @@
     <link rel="icon" href="./assets/2.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <script src="./js/sessao.js"></script>
+
+    <style>
+
+    body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(./assets/fundo.png);
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.1;
+        }
+
+    </style>
 
 </head>
 
@@ -17,12 +37,6 @@
 
         <div class="logonavbar">
             <img src="./assets/2.png" alt=""> <span>NutriLab</span>
-        </div>
-
-        <div class="itens">
-            <a href=""><span>Sobre</span></a>
-            <a href=""><span>Calculadoras</span></a>
-            <a href=""><span>Contato</span></a>
         </div>
 
         <div class="botoes">
@@ -61,18 +75,28 @@
                 <div class="inputs">
 
                     <span>Nome Completo:</span>
-                    <input type="text" id="ipt_nome">
-                    <span>Telefone:</span>
-                    <input type="number" id="ipt_tel">
-                    <span>Data de Nascimento:</span>
-                    <input type="date" id="ipt_data">
-                    <span>Email:</span>
-                    <input type="text" id="ipt_email">
-                    <span>Senha:</span>
-                    <input type="text" id="ipt_senha">
-                    <span>Confirme sua senha:</span>
-                    <input type="text" id="ipt_confirmasenha">
+                    <input type="text" id="ipt_nome" placeholder="Insira seu nome" oninput="validarNome()">
+                    <div id="div_erro" class="erro-msg">O nome deve conter mais caracteres</div>
 
+                    <span>Telefone:</span>
+                    <input type="number" id="ipt_tel" placeholder="Insira seu telefone" oninput="validarTelefone()">
+                    <div id="div_erro2" class="erro-msg">O telefone deve ter 11 caracteres</div>
+
+                    <span>Data de Nascimento:</span>
+                    <input type="date" id="ipt_data" oninput="validarData()">
+
+                    <span>Email:</span>
+                    <input type="text" id="ipt_email" placeholder="Insira seu email" oninput="validarEmail()">
+                    <div id="div_erro3" class="erro-msg">O email deve conter '@' e '.com'</div>
+
+                    <span>Senha:</span>
+                    <input type="text" id="ipt_senha" placeholder="Cadastre uma senha" oninput="validarSenha()">
+                    <div id="div_erro4" class="erro-msg">A senha deve ter pelo menos 8 caracteres</div>
+
+                    <span>Confirme sua senha:</span>
+                    <input type="text" id="ipt_confirmasenha" placeholder="Confirme sua senha"
+                        oninput="validarConfirmacaoSenha()">
+                    <div id="div_erro5" class="erro-msg">As senhas não coincidem</div>
 
                     <button class="botaocadastro" onclick="cadastrar()"> Cadastrar </button>
 
@@ -108,8 +132,62 @@
             window.location.href = 'index.html'
         }
 
-        // // Array para armazenar empresas cadastradas para validação de código de ativação
-        // let listaEmpresasCadastradas = [];
+        function validarNome() {
+            var nomeVar = ipt_nome.value;
+            if (nomeVar.length <= 1) {
+                ipt_nome.style.borderColor = "red";
+                div_erro.style.display = "block";
+            } else {
+                ipt_nome.style.borderColor = "";
+                div_erro.style.display = "none";
+            }
+        }
+
+        function validarTelefone() {
+            var telVar = ipt_tel.value;
+            if (telVar.length !== 11) {
+                ipt_tel.style.borderColor = "red";
+                div_erro2.style.display = "block";
+            } else {
+                ipt_tel.style.borderColor = "";
+                div_erro2.style.display = "none";
+            }
+        }
+
+        function validarEmail() {
+            var emailVar = ipt_email.value;
+            var emailVerificacao = emailVar.includes('@') && emailVar.includes('.') && emailVar.endsWith(".com");
+            if (!emailVerificacao) {
+                ipt_email.style.borderColor = "red";
+                div_erro3.style.display = "block";
+            } else {
+                ipt_email.style.borderColor = "";
+                div_erro3.style.display = "none";
+            }
+        }
+
+        function validarSenha() {
+            var senhaVar = ipt_senha.value;
+            if (senhaVar.length < 8) {
+                ipt_senha.style.borderColor = "red";
+                div_erro4.style.display = "block";
+            } else {
+                ipt_senha.style.borderColor = "";
+                div_erro4.style.display = "none";
+            }
+        }
+
+        function validarConfirmacaoSenha() {
+            var senhaVar = ipt_senha.value;
+            var confirmacaoSenhaVar = ipt_confirmasenha.value;
+            if (senhaVar !== confirmacaoSenhaVar) {
+                ipt_confirmasenha.style.borderColor = "red";
+                div_erro5.style.display = "block";
+            } else {
+                ipt_confirmasenha.style.borderColor = "";
+                div_erro5.style.display = "none";
+            }
+        }
 
         function cadastrar() {
 
@@ -120,38 +198,6 @@
             var telVar = ipt_tel.value;
             var dataVar = ipt_data.value;
 
-            var emailVerificacao = emailVar.includes('@') || emailVar.includes('.') || emailVar.endsWith(".com")
-
-            if (nomeVar.length <= 1) {
-                alert("O nome deve conter mais caracteres.")
-                finalizarAguardar();
-                return false;
-            }
-
-            if (emailVerificacao == false) {
-                alert("O email deve conter '@' e '.'.")
-                finalizarAguardar();
-                return false;
-            }
-
-            if (senhaVar.length < 8) {
-                alert("A senha deve ter pelo menos 8 caracteres.")
-                finalizarAguardar();
-                return false;
-            }
-
-            if (senhaVar != confirmacaoSenhaVar) {
-                alert("As senhas devem coincidir.")
-                finalizarAguardar();
-                return false;
-            }
-
-            if (telVar.length != 11) {
-                alert("O CPF deve conter 11 caracteres")
-                finalizarAguardar();
-                return false;
-            }
-
 
             // Verificando se há algum campo em branco
             if (
@@ -161,10 +207,10 @@
                 telVar == "" ||
                 confirmacaoSenhaVar == ""
             ) {
-                cardErro.style.display = "block";
-                mensagem_erro.innerHTML =
-                    "(Mensagem de erro para todos os campos em branco)";
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Preencha todos os campos para prosseguir`;
 
+                setTimeout(sumirMensagem, 2000);
                 finalizarAguardar();
                 return false;
             } else {

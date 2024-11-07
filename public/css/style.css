@@ -302,6 +302,7 @@ body {
     flex-direction: column;
     color: #fff;
     font-size: 20px;
+    margin-top: 20px;
 }
 
 .containerlec {
@@ -312,6 +313,7 @@ body {
     width: 70%;
     border-radius: 20px;
     margin-top: 40px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
 .campos {
@@ -353,7 +355,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    height: 700px;
+    height: 90vh;
 }
 
 html {
@@ -458,6 +460,13 @@ html {
     margin-bottom: 50px;
 }
 
+.calculadorafixa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .calculadorafixa h1 {
     color: #fff;
     font-size: 50px;
@@ -482,6 +491,44 @@ html {
 .calculadorafixa .containerlec h1 {
     font-size: 30px;
     color: #519758;
+}
+
+.containerlec .botaocalc {
+    border: none;
+    background-color: #519758;
+    width: 50%;
+    border-radius: 20px;
+    height: 50px;
+    color: #fff;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+#div_resultado button {
+    border: none;
+    background-image: #fff;
+    width: 10%;
+    border-radius: 20px;
+    height: 50px;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.erro-msg {
+    display: none; /* Inicialmente, as mensagens de erro ficam ocultas */
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+#div_resultado a {
+    color: #519758;
+    text-decoration: none;
 }
 
 .inputsimc {
@@ -556,6 +603,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .card_erro {
@@ -568,7 +616,8 @@ html {
     position: fixed;
     border-radius: 20px;
     border: #519758 3px solid;
-    padding: 50px;
+    padding: 20px;
+    box-shadow: 0px 0px 2000px 2000px rgba(0, 0, 0, 0.5);
 }
 
 .card_erro img {
