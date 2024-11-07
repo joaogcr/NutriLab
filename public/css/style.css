@@ -210,7 +210,7 @@ body {
     background-color: #fff;
     padding: 40px;
     border-radius: 20px;
-} 
+}
 
 .title {
     width: 80%;
@@ -356,9 +356,9 @@ body {
     height: 700px;
 }
 
-/* html {
+html {
     scroll-behavior: smooth;
-} */
+}
 
 
 .apresentacao .titulo {
@@ -551,3 +551,43 @@ body {
     width: 70%;
     text-align: center;
 }
+
+.alerta_erro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_erro {
+    display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #519758;
+    position: fixed;
+    border-radius: 20px;
+    border: #519758 3px solid;
+    padding: 50px;
+}
+
+.card_erro img {
+    width: 100px;
+}
+
+.card_erro #mensagem_erro {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.loading-div {
+    width: 50px;
+    display: none;
+    margin-left: 33%;
+    margin-top: 10px;
+  }
+  
+  .loading-div img {
+    height: 30px;
+    width: 30px;
+  }
