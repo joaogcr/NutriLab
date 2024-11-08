@@ -36,3 +36,83 @@
         </div>
 
     </div>
+
+    <div class="alinhar">
+
+        <div class="containerperfil">
+            <h1>Perfil</h1>
+
+            <div class="alinharbotoes">
+
+                <button class="botoesperfil">Dados Pessoais</button>
+                <button class="botoesperfil2">Evolução Corporal</button>
+
+            </div>
+
+            <img src="./assets/perfil.png" alt="">
+
+            <div class="dadosperfil">
+                <h1 id="b_usuario">Fulano</h1>
+                <span>Email: <span>email@email.com</span></span>
+                <span>Telefone: <span>11977573100</span></span>
+            </div>
+
+            <div class="inputsalteracao">
+
+                <span>Email: </span>
+                <input type="text" id="ipt_email" placeholder="Altere seu email">
+
+                <span>Senha: </span>
+                <input type="text" id="ipt_senha" placeholder="Altere uma senha">
+
+                <span>Confirme sua senha: </span>
+                <input type="text" id="ipt_confirmasenha" placeholder="Confirme sua senha">
+
+            </div>
+
+            <button class="botoesperfil" onclick="editar()">Alterar dados</button>
+
+        </div>
+
+        <div class="footer">
+
+            <img src="./assets/2.png" alt="" style="width: 100px;">
+            <span> © 2024 NutriLab All Rights Reserved </span>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+function editar() {
+        fetch(`/avisos/editar/${sessionStorage.getItem("EMAIL_USUARIO")}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: ipt_email.value
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.location = "/perfil.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+
+
+</script>

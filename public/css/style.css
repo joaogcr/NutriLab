@@ -640,3 +640,93 @@ html {
     height: 30px;
     width: 30px;
   }
+
+  .containerperfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20px;
+    width: 60%;
+    gap: 10px;
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  .containerperfil h1 {
+    color: #519758;
+    margin-bottom: 8px;
+  }
+
+  .containerperfil img{
+    width: 20%;
+    border-radius: 50%;
+    border: solid 4px #519758;
+    margin-top: 10px;
+  }
+
+  .botoesperfil {
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    border: none;
+    background-color: #519758;
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .botoesperfil2 {
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    border: solid 3px #519758;
+    background-color: #fff;
+    color: #519758;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .alinharbotoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 420px;
+  }
+
+  .dadosperfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #519758;
+  }
+
+  .dadosperfil span {
+    margin-bottom: 5px;
+  }
+
+  .inputsalteracao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    gap: 10px;
+    color: #519758;
+    font-weight: 600;
+  }
+
+  .inputsalteracao input {
+    border: solid 2px #519758;
+    width: 55%;
+    border-radius: 20px;
+    height: 40px;
+    text-align: center;
+    color: #48674B;
+  }
