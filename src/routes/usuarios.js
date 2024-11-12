@@ -11,4 +11,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.post("/calcularimc", function (req, res) {
+    usuarioController.calcularimc(req, res);
+});
+
 module.exports = router;

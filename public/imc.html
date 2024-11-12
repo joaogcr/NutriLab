@@ -10,6 +10,8 @@
       href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script src="./js/sessao.js"></script>
+
   </head>
 
   <body>
@@ -55,7 +57,7 @@
           <input type="number" id="ipt_altura" placeholder="Insira sua altura"/>
         </div>
 
-        <button class="botaocalc" onclick="calcular()">Calcular</button>
+        <button class="botaocalc" onclick="calcularimc()">Calcular</button>
       </div>
     </div>
 
@@ -69,11 +71,13 @@
 </html>
 
 <script>
-  function calcular() {
+  function calcularimc() {
     var mensagem = ``;
     var peso = Number(ipt_peso.value);
     var altura = Number(ipt_altura.value);
     var imc = peso / (altura * altura);
+    var imcVar = imc.toFixed(2)
+    var idVar = sessionStorage.ID_USUARIO
 
     if (peso <= 0 || altura <= 0) {
       alert("Insira dados válidos");
@@ -81,6 +85,19 @@
     } else {
       div_calculadora.style.display = "none";
       div_resultado.style.display = "flex";
+
+      fetch("/usuarios/calcularimc", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            imcServer: imcVar,
+            idServer: idVar
+          }),
+        })
 
       if (imc < 18.5) {
         mensagem = `
