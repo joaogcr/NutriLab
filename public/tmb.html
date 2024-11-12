@@ -1,81 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriLab</title>
-    <link rel="icon" href="./assets/2.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div class="navbar">
+      <div class="logonavbar">
+        <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
+      </div>
 
-        <div class="logonavbar">
-            <img src="./assets/2.png" alt=""> <span>NutriLab</span>
+      <div class="itens">
+        <a href="./imc.html"><span>IMC</span></a>
+        <a href="./tmb.html"><span>TMB</span></a>
+        <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
+      </div>
+
+      <div class="botoes">
+        <div class="botao2">
+          <button onclick="login()">
+            <a href="./perfil.html"><span>Perfil</span></a>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calculadorafixa" id="div_calculadora">
+      <h1>Taxa Metabólica Basal (TMB)</h1>
+      <span
+        >A Taxa Metabólica Basal (TMB) é a quantidade de energia (calorias) que
+        o corpo precisa para realizar suas funções básicas enquanto está em
+        repouso. Essas funções incluem respiração, circulação sanguínea,
+        regulação da temperatura corporal, funcionamento dos órgãos e manutenção
+        das células. Em outras palavras, a TMB representa a quantidade mínima de
+        calorias que o corpo gasta para se manter vivo e funcional, sem incluir
+        atividades físicas ou digestão de alimentos</span
+      >
+
+      <div class="containerlec">
+        <h1>Calcule sua TMB aqui!</h1>
+
+        <div class="inputsimc">
+          <span>Escolha seu sexo biológico:</span>
+          <select id="slt_sexo">
+            <option value="#">Selecione um</option>
+            <option value="m">Masculino</option>
+            <option value="f">Feminino</option>
+          </select>
+          <span>Idade:</span>
+          <input type="number" id="ipt_idade" placeholder="Insira sua idade" />
+          <span>Peso: (em kg)</span>
+          <input type="number" id="ipt_peso" placeholder="Insira seu peso" />
+          <span>Altura: (em cm)</span>
+          <input type="text" id="ipt_altura" placeholder="Insira sua altura" />
         </div>
 
-        <div class="itens">
-            <a href="./imc.html"><span>IMC</span></a>
-            <a href="./tmb.html"><span>TMB</span></a>
-            <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
-        </div>
+        <button class="botaocalc" onclick="calcular()">Calcular</button>
+      </div>
+    </div>
 
-        <div class="botoes">
-            <div class="botao2">
-                <button onclick="login()">
-                    <a href="./perfil.html"><span>Perfil</span></a>
-                </button>
-            </div>
-
-        </div>
+    <div id="div_resultado" class="resultadoimc">
 
     </div>
 
-    <div class="calculadorafixa">
-
-        <h1>Taxa Metabólica Basal (TMB)</h1>
-        <span>A Taxa Metabólica Basal (TMB) é a quantidade de energia (calorias) que o corpo precisa para realizar suas
-            funções básicas enquanto está em repouso. Essas funções incluem respiração, circulação sanguínea, regulação
-            da temperatura corporal, funcionamento dos órgãos e manutenção das células. Em outras palavras, a TMB
-            representa a quantidade mínima de calorias que o corpo gasta para se manter vivo e funcional, sem incluir
-            atividades físicas ou digestão de alimentos</span>
-
-        <div class="containerlec">
-
-            <h1>Calcule sua TMB aqui!</h1>
-
-            <div class="inputsimc">
-                <span>Escolha seu sexo biológico:</span>
-                <select id="slt_faixa">
-                    <option value="#">Selecione um</option>
-                    <option value="m">Masculino</option>
-                    <option value="f">Feminino</option>
-                </select>
-                <span>Insira sua idade:</span>
-                <input type="number">
-                <span>Insira seu peso:</span>
-                <input type="number">
-
-            </div>
-
-            <button class="botaocalc" onclick="calcular()"> Calcular </button>
-
-        </div>
-
+    <div class="alinhar">
+      <div id="div_resultadoget" class="resultadoget"></div>
     </div>
 
     <div class="footer">
-
-        <img src="./assets/2.png" alt="" style="width: 100px;">
-        <span> © 2024 NutriLab All Rights Reserved </span>
-
+      <img src="./assets/2.png" alt="" style="width: 100px" />
+      <span> © 2024 NutriLab All Rights Reserved </span>
     </div>
-
-</body>
-
+  </body>
 </html>
+
+<script>
+  function calcular() {
+    div_calculadora.style.display = "none";
+    div_resultado.style.display = "flex";
+
+    var idade = Number(ipt_idade.value);
+    var peso = Number(ipt_peso.value);
+    var altura = Number(ipt_altura.value);
+    var sexo = slt_sexo.value;
+    var tmb = 0;
+
+    if (sexo == "m") {
+      tmb = 88.362 + 13.397 * peso + 4.799 * altura - 5.677 * idade;
+    } else if (sexo == "f") {
+      tmb = 447.593 + 9.247 * peso + 3.098 * altura - 4.33 * idade;
+    }
+
+    div_resultado.innerHTML = `
+          <h1>O resultado da sua TMB é ${tmb.toFixed(0)} kcal/dia</h1>
+
+      <span>
+        Depois de calcular sua Taxa Metabólica Basal (TMB), você pode usá-la
+        como base para determinar o número total de calorias que deve consumir
+        diariamente, levando em consideração seu nível de atividade física e
+        seus objetivos de saúde. Veja os passos que você pode seguir:
+        <br /><br />
+        <h1>Calcular o Gasto Energético Diário Total (GET)</h1>
+        <br />
+        A TMB é apenas o número de calorias que o corpo precisa em repouso. Para
+        obter o Gasto Energético Diário Total (GET), que inclui as calorias
+        gastas com atividades físicas e digestão, é necessário multiplicar a TMB
+        por um fator de atividade. O fator varia de acordo com o seu nível de
+        atividade física:
+      </span>
+
+      <div class="containerlec">
+        <h1>Calcule sua GET aqui!</h1>
+
+        <div class="inputsimc">
+          <span>TMB:</span>
+          <input type="number" id="ipt_tmb" placeholder="Insira sua TMB" />
+          <br />
+          <span>Selecione seu fator de atividade física</span>
+          <select id="slt_atividade">
+            <option value="#">Selecione um</option>
+            <option value="sedentario">Sedentário</option>
+            <option value="levemente">Levemente ativo</option>
+            <option value="moderadamente">Moderadamente ativo</option>
+            <option value="altamente">Altamente ativo</option>
+            <option value="extremamente">Extremamente ativo</option>
+          </select>
+        </div>
+
+        <button onclick="calcularget()">Calcular</button>
+      </div>
+    `;
+  }
+
+  function calcularget() {
+    var tmb = Number(ipt_tmb.value);
+    var atividade = slt_atividade.value;
+    var get = 0;
+
+    div_resultado.style.display = "none"
+    div_resultadoget.style.display = "flex"
+
+    if(atividade == "sedentario") {
+        get = tmb * 1.2
+    } else if(atividade == "levemente") {
+        get = tmb * 1.375
+    } else if(atividade == "moderadamente") {
+        get = tmb * 1.55
+    } else if(atividade == "altamente") {
+        get = tmb * 1.725
+    } else if(atividade == "extremamente") {
+        get = tmb * 1.9
+    }
+
+    div_resultadoget.innerHTML = `
+    <h1>O resultado do seu GET é ${get.toFixed(0)} kcal/dia</h1>
+
+        <span>
+          <b>Ajustar as calorias de acordo com seus objetivos</b>
+          <br /><br />
+          Dependendo de seus objetivos de saúde, você pode ajustar o número
+          total de calorias que deve consumir diariamente:
+          <br /><br />
+          <b>Manutenção de peso:</b> Consuma uma quantidade de calorias
+          aproximadamente igual ao seu Gasto Energético Diário Total (GET).
+          <br /><br />
+          <b>Perda de peso:</b> Crie um déficit calórico. Consuma menos calorias
+          do que o seu GET. Um déficit de cerca de 500 calorias por dia pode
+          resultar em uma perda de peso de aproximadamente 0,5 kg por semana.
+          Ajuste de acordo com seus resultados e metas. <br /><br />
+          <b>Ganho de peso:</b> Crie um superávit calórico. Consuma mais
+          calorias do que o seu GET. Um excedente de cerca de 300 a 500 calorias
+          por dia pode promover ganho de peso gradual, ou mais se o objetivo for
+          ganhar massa muscular. <br /><br />
+          <b>Considerar a qualidade da alimentação</b>
+          <br /><br />
+          Não se trata apenas de calorias. Priorize alimentos nutritivos e de
+          qualidade, como frutas, vegetais, proteínas magras, grãos integrais e
+          gorduras saudáveis. Isso ajuda a garantir que seu corpo receba todos
+          os micronutrientes (vitaminas e minerais) necessários para a saúde,
+          além de ajudar a manter a saciedade e o bem-estar.
+          <br /><br />
+          <b>Manter a atividade física regular</b>
+          <br /><br />
+          Para otimizar o gasto calórico e a saúde em geral, mantenha um nível
+          regular de atividade física. Uma combinação de exercícios aeróbicos
+          (como corrida, ciclismo) e de resistência (como musculação) ajuda
+          tanto na perda de gordura quanto na preservação ou aumento da massa
+          muscular.
+          <br /><br />
+          <b
+            >Esses passos ajudam a criar uma estratégia nutricional eficaz e
+            personalizada, baseada no seu TMB e nas suas metas de saúde.</b
+          >
+        </span>
+    `
+  }
+</script>
