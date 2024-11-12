@@ -631,6 +631,12 @@ html {
     text-align: start;
 }
 
+.graficopeso {
+    width: 50vw;
+    height: 60vh;
+    margin-top: 30px;
+}
+
 .resultadoimc img {
     width: 80%;
 }
@@ -689,6 +695,15 @@ html {
     width: 30px;
   }
 
+  #div_camposperfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+  }
+
   .containerperfil {
     display: flex;
     justify-content: center;
@@ -708,7 +723,7 @@ html {
   }
 
   .containerperfil img{
-    width: 20%;
+    width: 25%;
     border-radius: 50%;
     border: solid 4px #519758;
     margin-top: 10px;
@@ -770,11 +785,76 @@ html {
     font-weight: 600;
   }
 
-  .inputsalteracao input {
+  #div_camposperfil .inputsalteracao input {
     border: solid 2px #519758;
     width: 55%;
     border-radius: 20px;
     height: 40px;
     text-align: center;
     color: #48674B;
+  }
+
+  #div_camposevolucao {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  #div_dados {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #div_camposevolucao img {
+    width: 15%;
+  }
+
+  #div_camposevolucao .miniperfil span {
+    color: #519758;
+    font-weight: 600;
+    font-size: 30px;
+  }
+
+  .pesos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+    width: 100%;
+    font-size: 25px;
+    color: #519758;
+    font-weight: 600;
+  }
+
+  .camposinserir {
+    width: 100%;
+  }
+
+  .pesos input {
+    border: solid 2px #519758;
+    width: 20%;
+    border-radius: 20px;
+    height: 35px;
+    text-align: center;
+    color: #48674B;
+  }
+
+  .pesos button {
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    border: none;
+    background-color: #519758;
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
   }

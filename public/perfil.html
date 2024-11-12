@@ -1,118 +1,213 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriLab</title>
-    <link rel="icon" href="./assets/2.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="./js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div class="navbar">
+      <div class="logonavbar">
+        <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
+      </div>
 
-        <div class="logonavbar">
-            <img src="./assets/2.png" alt=""> <span>NutriLab</span>
+      <div class="itens">
+        <a href="./imc.html"><span>IMC</span></a>
+        <a href="./tmb.html"><span>TMB</span></a>
+        <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
+      </div>
+
+      <div class="botoes">
+        <div class="botao2">
+          <button onclick="sair()">
+            <a href="./index.html"><span>Home</span></a>
+          </button>
         </div>
-
-        <div class="itens">
-            <a href="./imc.html"><span>IMC</span></a>
-            <a href="./tmb.html"><span>TMB</span></a>
-            <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
-        </div>
-
-        <div class="botoes">
-            <div class="botao2">
-                <button onclick="login()">
-                    <a href="./cadastro.html"><span>Cadastre-se</span></a>
-                </button>
-            </div>
-
-        </div>
-
+      </div>
     </div>
 
     <div class="alinhar">
+      <div class="containerperfil" id="div_perfil">
+        <h1>Perfil</h1>
 
-        <div class="containerperfil">
-            <h1>Perfil</h1>
-
-            <div class="alinharbotoes">
-
-                <button class="botoesperfil">Dados Pessoais</button>
-                <button class="botoesperfil2">Evolução Corporal</button>
-
-            </div>
-
-            <img src="./assets/perfil.png" alt="">
-
-            <div class="dadosperfil">
-                <h1 id="b_usuario">Fulano</h1>
-                <span>Email: <span>email@email.com</span></span>
-                <span>Telefone: <span>11977573100</span></span>
-            </div>
-
-            <div class="inputsalteracao">
-
-                <span>Email: </span>
-                <input type="text" id="ipt_email" placeholder="Altere seu email">
-
-                <span>Senha: </span>
-                <input type="text" id="ipt_senha" placeholder="Altere uma senha">
-
-                <span>Confirme sua senha: </span>
-                <input type="text" id="ipt_confirmasenha" placeholder="Confirme sua senha">
-
-            </div>
-
-            <button class="botoesperfil" onclick="editar()">Alterar dados</button>
-
+        <div class="alinharbotoes">
+          <button class="botoesperfil" onclick="dados()">Dados Pessoais</button>
+          <button class="botoesperfil2" onclick="evolucao()">
+            Evolução Corporal
+          </button>
         </div>
 
-        <div class="footer">
+        <div id="div_camposperfil">
+          <img src="./assets/perfil.png" alt="" />
 
-            <img src="./assets/2.png" alt="" style="width: 100px;">
-            <span> © 2024 NutriLab All Rights Reserved </span>
+          <div class="dadosperfil">
+            <h1 id="b_usuario">Fulano</h1>
+            <span>Email: <span>email@email.com</span></span>
+            <span>Telefone: <span>11977573100</span></span>
+          </div>
 
+          <div class="inputsalteracao">
+            <span>Email: </span>
+            <input type="text" id="ipt_email" placeholder="Altere seu email" />
+
+            <span>Senha: </span>
+            <input type="text" id="ipt_senha" placeholder="Altere uma senha" />
+
+            <span>Confirme sua senha: </span>
+            <input
+              type="text"
+              id="ipt_confirmasenha"
+              placeholder="Confirme sua senha"
+            />
+          </div>
+
+          <button class="botoesperfil" onclick="editar()">Alterar dados</button>
         </div>
+        <div id="div_camposevolucao">
+            <div class="miniperfil" id="div_dados">
+                <img src="./assets/perfil.png" alt="" />
+                <span id="b_usuario">Fulano</span><br>
+                <span>Gráfico de Evolução Corporal</span>
+            </div>
 
+          <div class="graficopeso" style="height: 50vh; width: 50vw">
+            <canvas id="myChart"></canvas>
+          </div>
+          <div class="pesos">
+            <div class="camposinserir">
+            <span>Peso atual: </span><input type="number" id="ipt_peso" placeholder="Insira seu peso">
+            <span>Data: </span><input type="date" id="ipt_data">
+        </div>
+        <div class="botaoinserir">
+            <button>Inserir</button>
+        </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <img src="./assets/2.png" alt="" style="width: 100px" />
+        <span> © 2024 NutriLab All Rights Reserved </span>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
+  function editar() {
+    fetch(`/avisos/editar/${sessionStorage.getItem("EMAIL_USUARIO")}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: ipt_email.value,
+        senha: ipt_senha.value,
+      }),
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          window.alert(
+            "Post atualizado com sucesso pelo usuario de email: " +
+              sessionStorage.getItem("EMAIL_USUARIO") +
+              "!"
+          );
+          window.location = "/perfil.html";
+        } else if (resposta.status == 404) {
+          window.alert("Deu 404!");
+        } else {
+          throw (
+            "Houve um erro ao tentar realizar a postagem! Código da resposta: " +
+            resposta.status
+          );
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
 
-function editar() {
-        fetch(`/avisos/editar/${sessionStorage.getItem("EMAIL_USUARIO")}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: ipt_email.value
-            })
-        }).then(function (resposta) {
+  function evolucao() {
+    div_camposperfil.style.display = "none";
+    div_camposevolucao.style.display = "flex";
 
-            if (resposta.ok) {
-                window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/perfil.html"
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-    }
+    const botoes = document.querySelectorAll(".botoesperfil2");
+    const botoes2 = document.querySelectorAll(".botoesperfil");
+            // Itera por todos os botões selecionados e alterna o display
+            botoes.forEach(botao => {
+                botao.style.backgroundColor = "#519758"
+                botao.style.color = "#fff"
+                botao.style.border = "solid 3px #519758"
+            });
 
+            botoes2.forEach(botao2 => {
+                botao2.style.backgroundColor = "#fff"
+                botao2.style.color = "#519758"
+                botao2.style.border = "solid 3px #519758"
+            });
 
+  }
 
+  function dados() {
+    div_camposperfil.style.display = "flex";
+    div_camposevolucao.style.display = "none";
+
+    const botoes = document.querySelectorAll(".botoesperfil2");
+    const botoes2 = document.querySelectorAll(".botoesperfil");
+
+    botoes.forEach(botao => {
+        botao.style.backgroundColor = "#fff";
+        botao.style.color = "#519758";
+        botao.style.border = "solid 3px #519758";
+    });
+
+    botoes2.forEach(botao2 => {
+        botao2.style.backgroundColor = "#519758";
+        botao2.style.color = "#fff";
+        botao2.style.border = "solid 3px #519758";
+    });
+
+  }
+</script>
+
+<script>
+  const labels = [
+    "05/2024",
+    "06/2024",
+    "07/2024",
+    "08/2024",
+    "09/2024",
+    "10/2024",
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Peso",
+        backgroundColor: "#519758",
+        borderColor: "#519758",
+        data: [80, 72, 70, 85, 90, 87],
+      },
+    ],
+  };
+
+  const config = {
+    type: "line",
+    data: data,
+    options: {},
+  };
+</script>
+
+<script>
+  const myChart = new Chart(document.getElementById("myChart"), config);
 </script>
