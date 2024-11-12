@@ -910,3 +910,40 @@ html {
     background-color: #C10000;
     padding: 15px;
 }
+
+.resultadoagua {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.resultadoagua h1{
+    color: #fff;
+    font-size: 50px;
+}
+
+.resultadoagua span {
+    color: white;
+    font-size: 30px;
+}
+
+.resultadoagua img {
+    width: 50%;
+    margin-top: 40px;
+}
+
+.vantagens {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.alinharagua {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54%;
+    margin-left: 10px
+}

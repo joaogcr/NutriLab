@@ -1,70 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriLab</title>
-    <link rel="icon" href="./assets/2.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div class="navbar">
+      <div class="logonavbar">
+        <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
+      </div>
 
-        <div class="logonavbar">
-            <img src="./assets/2.png" alt=""> <span>NutriLab</span>
+      <div class="itens">
+        <a href="./imc.html"><span>IMC</span></a>
+        <a href="./tmb.html"><span>TMB</span></a>
+        <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
+      </div>
+
+      <div class="botoes">
+        <div class="botao2">
+          <button onclick="login()">
+            <a href="./perfil.html"><span>Perfil</span></a>
+          </button>
         </div>
-
-        <div class="itens">
-            <a href="./imc.html"><span>IMC</span></a>
-            <a href="./tmb.html"><span>TMB</span></a>
-            <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
-        </div>
-
-        <div class="botoes">
-            <div class="botao2">
-                <button onclick="login()">
-                    <a href="./perfil.html"><span>Perfil</span></a>
-                </button>
-            </div>
-
-        </div>
-
+      </div>
     </div>
 
+    <div class="calculadorafixa" id="div_calculadora">
+      <h1>Ingestão Hídrica</h1>
+      <span
+        >Uma ingestão hídrica adequada é fundamental para o corpo e traz
+        inúmeras vantagens para o bom funcionamento do organismo. A água
+        desempenha papéis essenciais nos processos biológicos, regulando a
+        temperatura corporal, facilitando o transporte de nutrientes, e
+        promovendo a circulação sanguínea. Ela também auxilia na digestão e no
+        processo de absorção de vitaminas e minerais, que são fundamentais para
+        a saúde.</span
+      >
 
-    <div class="calculadorafixa">
-            
-            <h1>Ingestão Hídrica</h1>
-            <span>Uma ingestão hídrica adequada é fundamental para o corpo e traz inúmeras vantagens para o bom funcionamento do organismo. A água desempenha papéis essenciais nos processos biológicos, regulando a temperatura corporal, facilitando o transporte de nutrientes, e promovendo a circulação sanguínea. Ela também auxilia na digestão e no processo de absorção de vitaminas e minerais, que são fundamentais para a saúde.</span>
+      <div class="containerlec">
+        <h1>Calcula sua meta de ingestão hídrica!</h1>
 
-                <div class="containerlec">
+        <div class="inputsimc">
+          <span>Insira seu peso:</span>
+          <input type="number" placeholder="Peso em kg" id="ipt_peso" />
+          <span style="font-size: 15px"
+            >Referência utilizada para o Cálculo: 50ml/Kg</span
+          >
+        </div>
 
-                    <h1>Calcula sua meta de ingestão hídrica!</h1>
-
-                    <div class="inputsimc">
-                        <span>Insira seu peso:</span>
-                        <input type="number" placeholder="Peso em kg">
-                        <span style="font-size: 15px;">Referência utilizada para o Cálculo: 35ml/Kg</span>
-                    </div>
-                    
-                    <button class="botaocalc" onclick="calcular()"> Calcular </button>
-
-                </div>
-
+        <button class="botaocalc" onclick="calcular()">Calcular</button>
+      </div>
     </div>
+
+    <div id="div_resultado" class="resultadoagua"></div>
 
     <div class="footer">
-
-        <img src="./assets/2.png" alt="" style="width: 100px;">
-        <span> © 2024 NutriLab All Rights Reserved </span>
-
+      <img src="./assets/2.png" alt="" style="width: 100px" />
+      <span> © 2024 NutriLab All Rights Reserved </span>
     </div>
-
-</body>
-
+  </body>
 </html>
+
+<script>
+  function calcular() {
+    div_calculadora.style.display = "none";
+
+    var peso = Number(ipt_peso.value);
+    var agua = peso * 50;
+
+    var aguaString = agua.toString();
+    var aguaFormatado = aguaString.slice(0, 1) + ',' + aguaString.slice(1);
+
+    div_resultado.innerHTML = `
+        <h1>Sua meta de ingestão hídrica são ${aguaFormatado} litros!</h1>
+      <span
+        >Manter uma ingestão adequada de água ao longo do dia é essencial para o
+        bom <br />
+        funcionamento do corpo e para promover o bem-estar geral.</span
+      >
+      <div class="alinharagua">
+        <div class="vantagens">
+          <br /><br /><br /><br />
+          <h1>Vantagens</h1>
+          <br />
+          <span>
+            • Regulação da temperatura corporal <br />
+            <br />
+            • Eliminação eficaz de toxinas e saúde renal<br />
+            <br />
+            • Melhoria na digestão<br />
+            <br />
+            • Pele mais saudável e hidratada <br />
+            <br />
+            • Melhora no desempenho físico <br />
+            <br />
+            • Auxílio na perda de peso <br />
+            <br />
+            • Função cognitiva e mental aprimorada <br />
+            <br />
+            • Saúde das articulações e músculos <br />
+            <br />
+            • Melhora da circulação sanguínea <br />
+            <br />
+            • Suporte ao sistema imunológico <br />
+            <br />
+            • Prevenção de dores de cabeça e fadiga <br />
+            <br />
+          </span>
+        </div>
+        <img src="./assets/Design sem nome (11).png" alt="" />
+      </div>
+        `;
+  }
+</script>
