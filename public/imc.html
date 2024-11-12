@@ -1,102 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriLab</title>
-    <link rel="icon" href="./assets/2.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div class="navbar">
+      <div class="logonavbar">
+        <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
+      </div>
 
-        <div class="logonavbar">
-            <img src="./assets/2.png" alt=""> <span>NutriLab</span>
+      <div class="itens">
+        <a href="./imc.html"><span>IMC</span></a>
+        <a href="./tmb.html"><span>TMB</span></a>
+        <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
+      </div>
+
+      <div class="botoes">
+        <div class="botao2">
+          <button>
+            <a href="./perfil.html"><span>Perfil</span></a>
+          </button>
         </div>
-
-        <div class="itens">
-            <a href="./imc.html"><span>IMC</span></a>
-            <a href="./tmb.html"><span>TMB</span></a>
-            <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
-        </div>
-
-        <div class="botoes">
-            <div class="botao2">
-                <button>
-                    <a href="./perfil.html"><span>Perfil</span></a>
-                </button>
-            </div>
-
-        </div>
-
+      </div>
     </div>
 
     <div class="calculadorafixa" id="div_calculadora">
+      <h1>Índice de Massa Corporal (IMC)</h1>
+      <span
+        >O IMC (Índice de Massa Corporal) é uma medida usada para avaliar se uma
+        pessoa está dentro de um peso considerado saudável em relação à sua
+        altura. Ele é calculado dividindo o peso (em quilogramas) pela altura
+        (em metros) ao quadrado. Embora o IMC seja amplamente utilizado, ele não
+        leva em consideração a composição corporal, como a proporção entre
+        gordura e músculo, nem fatores como idade, sexo ou nível de atividade
+        física.</span
+      >
 
-        <h1>Índice de Massa Corporal (IMC)</h1>
-        <span>O IMC (Índice de Massa Corporal) é uma medida usada para avaliar se uma pessoa está dentro de um peso
-            considerado saudável em relação à sua altura. Ele é calculado dividindo o peso (em quilogramas) pela
-            altura (em metros) ao quadrado. Embora o IMC seja amplamente utilizado, ele não leva em consideração a
-            composição corporal, como a proporção entre gordura e músculo, nem fatores como idade, sexo ou nível de
-            atividade física.</span>
+      <div class="containerlec">
+        <h1>Calcule seu IMC aqui!</h1>
 
-        <div class="containerlec">
-
-            <h1>Calcule seu IMC aqui!</h1>
-
-            <div class="inputsimc">
-                <span>Insira seu peso:</span>
-                <input type="number" id="ipt_peso">
-                <span>Insira sua altura</span>
-                <input type="number" id="ipt_altura">
-            </div>
-
-            <button class="botaocalc" onclick="calcular()"> Calcular </button>
-
+        <div class="inputsimc">
+          <span>Insira seu peso:</span>
+          <input type="number" id="ipt_peso" placeholder="Insira seu peso"/>
+          <span>Insira sua altura</span>
+          <input type="number" id="ipt_altura" placeholder="Insira sua altura"/>
         </div>
 
+        <button class="botaocalc" onclick="calcular()">Calcular</button>
+      </div>
     </div>
 
-    <div class="resultadoimc" id="div_resultado">
-    </div>
+    <div class="resultadoimc" id="div_resultado"></div>
 
     <div class="footer">
-
-        <img src="./assets/2.png" alt="" style="width: 100px;">
-        <span> © 2024 NutriLab All Rights Reserved </span>
-
+      <img src="./assets/2.png" alt="" style="width: 100px" />
+      <span> © 2024 NutriLab All Rights Reserved </span>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
+  function calcular() {
+    var mensagem = ``;
+    var peso = Number(ipt_peso.value);
+    var altura = Number(ipt_altura.value);
+    var imc = peso / (altura * altura);
 
-    function calcular() {
+    if (peso <= 0 || altura <= 0) {
+      alert("Insira dados válidos");
+      return false;
+    } else {
+      div_calculadora.style.display = "none";
+      div_resultado.style.display = "flex";
 
-        var mensagem = ``;
-        var peso = Number(ipt_peso.value);
-        var altura = Number(ipt_altura.value);
-        var imc = peso / (altura * altura);
-
-        if (peso <= 0 || altura <= 0) {
-            alert("Insira dados válidos")
-            return false
-        }
-
-        else {
-
-            div_calculadora.style.display = "none";
-            div_resultado.style.display = "flex";
-
-            if (imc < 18.5) {
-                mensagem = `
+      if (imc < 18.5) {
+        mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -109,17 +96,35 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt=""> <br>
-            <button>
+
+                    <div class="classificacao">
+            <div class="abaixopeso">
+                <span>Abaixo do Peso <br> IMC < 18.5</span>
+            </div>
+            <div class="pesonormal">
+                <span>Peso Normal <br> IMC 18.5 - 24.9</span>
+            </div>
+            <div class="sobrepeso">
+                <span>Sobrepeso <br> IMC 25 - 29.9</span>
+            </div>
+            <div class="obesidade1">
+                <span>Obesidade Grau I <br> IMC 30 - 34.9</span>
+            </div>
+            <div class="obesidade2">
+                <span>Obesidade Grau II <br> IMC 35 - 39.9</span>
+            </div>
+            <div class="obesidade3">
+                <span>Obesidade Grau III <br> IMC > 40</span>
+            </div>
+        </div>
+                    <button>
                 <a href="./imc.html">
-                    Voltar
+                     Voltar
                 </a>
             </button>
             `;
-            }
-
-            else if (imc >= 18.5 && imc <= 24.9) {
-                mensagem = `
+      } else if (imc >= 18.5 && imc <= 24.9) {
+        mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -132,17 +137,34 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt=""> <br>
+        <div class="classificacao">
+            <div class="abaixopeso">
+                <span>Abaixo do Peso <br> IMC < 18.5</span>
+            </div>
+            <div class="pesonormal">
+                <span>Peso Normal <br> IMC 18.5 - 24.9</span>
+            </div>
+            <div class="sobrepeso">
+                <span>Sobrepeso <br> IMC 25 - 29.9</span>
+            </div>
+            <div class="obesidade1">
+                <span>Obesidade Grau I <br> IMC 30 - 34.9</span>
+            </div>
+            <div class="obesidade2">
+                <span>Obesidade Grau II <br> IMC 35 - 39.9</span>
+            </div>
+            <div class="obesidade3">
+                <span>Obesidade Grau III <br> IMC > 40</span>
+            </div>
+        </div>
             <button>
                 <a href="./imc.html">
                      Voltar
                 </a>
             </button>
             `;
-            }
-
-            else if (imc >= 25 && imc <= 29.9) {
-                mensagem = `
+      } else if (imc >= 25 && imc <= 29.9) {
+        mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -156,12 +178,34 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt="">            
+        <div class="classificacao">
+            <div class="abaixopeso">
+                <span>Abaixo do Peso <br> IMC < 18.5</span>
+            </div>
+            <div class="pesonormal">
+                <span>Peso Normal <br> IMC 18.5 - 24.9</span>
+            </div>
+            <div class="sobrepeso">
+                <span>Sobrepeso <br> IMC 25 - 29.9</span>
+            </div>
+            <div class="obesidade1">
+                <span>Obesidade Grau I <br> IMC 30 - 34.9</span>
+            </div>
+            <div class="obesidade2">
+                <span>Obesidade Grau II <br> IMC 35 - 39.9</span>
+            </div>
+            <div class="obesidade3">
+                <span>Obesidade Grau III <br> IMC > 40</span>
+            </div>
+        </div>
+                    <button>
+                <a href="./imc.html">
+                     Voltar
+                </a>
+            </button>          
             `;
-            }
-
-            else if (imc >= 30 && imc <= 34.9) {
-                mensagem = `
+      } else if (imc >= 30 && imc <= 34.9) {
+        mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -175,12 +219,34 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt="">            
+        <div class="classificacao">
+            <div class="abaixopeso">
+                <span>Abaixo do Peso <br> IMC < 18.5</span>
+            </div>
+            <div class="pesonormal">
+                <span>Peso Normal <br> IMC 18.5 - 24.9</span>
+            </div>
+            <div class="sobrepeso">
+                <span>Sobrepeso <br> IMC 25 - 29.9</span>
+            </div>
+            <div class="obesidade1">
+                <span>Obesidade Grau I <br> IMC 30 - 34.9</span>
+            </div>
+            <div class="obesidade2">
+                <span>Obesidade Grau II <br> IMC 35 - 39.9</span>
+            </div>
+            <div class="obesidade3">
+                <span>Obesidade Grau III <br> IMC > 40</span>
+            </div>
+        </div>
+                    <button>
+                <a href="./imc.html">
+                     Voltar
+                </a>
+            </button>          
             `;
-            }
-
-            else if (imc >= 35 && imc <= 39.9) {
-                mensagem = `
+      } else if (imc >= 35 && imc <= 39.9) {
+        mensagem = `
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -195,12 +261,34 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt="">            
+                <div class="classificacao">
+            <div class="abaixopeso">
+                <span>Abaixo do Peso <br> IMC < 18.5</span>
+            </div>
+            <div class="pesonormal">
+                <span>Peso Normal <br> IMC 18.5 - 24.9</span>
+            </div>
+            <div class="sobrepeso">
+                <span>Sobrepeso <br> IMC 25 - 29.9</span>
+            </div>
+            <div class="obesidade1">
+                <span>Obesidade Grau I <br> IMC 30 - 34.9</span>
+            </div>
+            <div class="obesidade2">
+                <span>Obesidade Grau II <br> IMC 35 - 39.9</span>
+            </div>
+            <div class="obesidade3">
+                <span>Obesidade Grau III <br> IMC > 40</span>
+            </div>
+        </div>
+                    <button>
+                <a href="./imc.html">
+                     Voltar
+                </a>
+            </button>            
             `;
-            }
-
-            else {
-                mensagem = `        
+      } else {
+        mensagem = `        
         <h1>O resultado do seu IMC é: ${imc.toFixed(2)}</h1>
 
         <span>
@@ -214,16 +302,35 @@
         </span>
 
         <img src="./assets/imc-removebg-preview.png" alt="">
-        <img src="./assets/termometroimc.png" alt="">
+                <div class="classificacao">
+            <div class="abaixopeso">
+                <span>Abaixo do Peso <br> IMC < 18.5</span>
+            </div>
+            <div class="pesonormal">
+                <span>Peso Normal <br> IMC 18.5 - 24.9</span>
+            </div>
+            <div class="sobrepeso">
+                <span>Sobrepeso <br> IMC 25 - 29.9</span>
+            </div>
+            <div class="obesidade1">
+                <span>Obesidade Grau I <br> IMC 30 - 34.9</span>
+            </div>
+            <div class="obesidade2">
+                <span>Obesidade Grau II <br> IMC 35 - 39.9</span>
+            </div>
+            <div class="obesidade3">
+                <span>Obesidade Grau III <br> IMC > 40</span>
+            </div>
+        </div>
+                    <button>
+                <a href="./imc.html">
+                     Voltar
+                </a>
+            </button>
             `;
-            }
-
-        }
-
-        div_resultado.innerHTML = mensagem;
+      }
     }
 
-
-
-
+    div_resultado.innerHTML = mensagem;
+  }
 </script>

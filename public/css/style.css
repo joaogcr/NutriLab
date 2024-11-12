@@ -4,6 +4,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: 100vh;
 }
 
 /* body::before {
@@ -858,3 +859,54 @@ html {
     font-weight: 600;
     cursor: pointer;
   }
+
+  .classificacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    font-size: 25px;
+    margin-bottom: 30px;
+  }
+
+  .classificacao span {
+    color: #000;
+    font-weight: 520;
+  }
+
+  .abaixopeso {
+    width: 16.6%;
+    background-color: #9BFFAC;
+    padding: 15px;
+}
+
+.pesonormal {
+    width: 16.6%;
+    background-color: #4FFF72;
+    padding: 15px;
+}
+
+.sobrepeso {
+    width: 16.6%;
+    background-color: #F9FF9E;
+    padding: 15px;
+}
+
+.obesidade1 {
+    width: 16.6%;
+    background-color: #FFEE51;
+    padding: 15px;
+}
+
+.obesidade2 {
+    width: 16.6%;
+    background-color: #FFB700;
+    padding: 15px;
+}
+
+.obesidade3 {
+    width: 16.6%;
+    background-color: #C10000;
+    padding: 15px;
+}
