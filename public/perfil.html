@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
-  <body>
+  <body onload="validar()">
     <div class="navbar">
       <div class="logonavbar">
         <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
@@ -51,8 +51,8 @@
 
           <div class="dadosperfil">
             <h1 id="b_usuario">Fulano</h1>
-            <span>Email: <span>email@email.com</span></span>
-            <span>Telefone: <span>11977573100</span></span>
+            <span id="b_email">Email: <span>email@email.com</span></span>
+            <span id="b_telefone">Telefone: <span>11977573100</span></span>
           </div>
 
           <div class="inputsalteracao">
@@ -75,7 +75,7 @@
         <div id="div_camposevolucao">
             <div class="miniperfil" id="div_dados">
                 <img src="./assets/perfil.png" alt="" />
-                <span id="b_usuario">Fulano</span><br>
+                <span id="b_usuario2">Fulano</span><br>
                 <span>Gráfico de Evolução Corporal</span>
             </div>
 
@@ -103,38 +103,38 @@
 </html>
 
 <script>
-  function editar() {
-    fetch(`/avisos/editar/${sessionStorage.getItem("EMAIL_USUARIO")}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: ipt_email.value,
-        senha: ipt_senha.value,
-      }),
-    })
-      .then(function (resposta) {
-        if (resposta.ok) {
-          window.alert(
-            "Post atualizado com sucesso pelo usuario de email: " +
-              sessionStorage.getItem("EMAIL_USUARIO") +
-              "!"
-          );
-          window.location = "/perfil.html";
-        } else if (resposta.status == 404) {
-          window.alert("Deu 404!");
-        } else {
-          throw (
-            "Houve um erro ao tentar realizar a postagem! Código da resposta: " +
-            resposta.status
-          );
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
+//   function editar() {
+//     fetch(`/avisos/editar/${sessionStorage.getItem("EMAIL_USUARIO")}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         email: ipt_email.value,
+//         senha: ipt_senha.value,
+//       }),
+//     })
+//       .then(function (resposta) {
+//         if (resposta.ok) {
+//           window.alert(
+//             "Post atualizado com sucesso pelo usuario de email: " +
+//               sessionStorage.getItem("EMAIL_USUARIO") +
+//               "!"
+//           );
+//           window.location = "/perfil.html";
+//         } else if (resposta.status == 404) {
+//           window.alert("Deu 404!");
+//         } else {
+//           throw (
+//             "Houve um erro ao tentar realizar a postagem! Código da resposta: " +
+//             resposta.status
+//           );
+//         }
+//       })
+//       .catch(function (resposta) {
+//         console.log(`#ERRO: ${resposta}`);
+//       });
+//   }
 
   function evolucao() {
     div_camposperfil.style.display = "none";
@@ -156,6 +156,22 @@
             });
 
   }
+
+  function validar() {
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
+    var telefone = sessionStorage.TELEFONE_USUARIO;
+
+    var b_usuario = document.getElementById("b_usuario");
+    var b_usuario2 = document.getElementById("b_usuario2");
+    var b_email = document.getElementById("b_email");
+    var b_telefone = document.getElementById("b_telefone");
+
+    b_email.innerHTML = email
+    b_telefone.innerHTML = telefone
+    b_usuario.innerHTML = nome
+    b_usuario2.innerHTML = nome
+}
 
   function dados() {
     div_camposperfil.style.display = "flex";

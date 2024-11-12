@@ -1,188 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NutriLab</title>
-    <link rel="icon" href="./assets/2.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="./js/sessao.js"></script>
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div class="navbar">
+      <div class="logonavbar">
+        <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
+      </div>
 
-        <div class="logonavbar">
-            <img src="./assets/2.png" alt=""> <span>NutriLab</span>
+      <div class="botoes">
+        <div class="botao2">
+          <button onclick="login()">
+            <a href="./cadastro.html"><span>Cadastre-se</span></a>
+          </button>
         </div>
-
-
-
-        <div class="botoes">
-            <div class="botao2">
-                <button onclick="login()">
-                    <a href="./cadastro.html"><span>Cadastre-se</span></a>
-                </button>
-            </div>
-
-        </div>
-
+      </div>
     </div>
 
     <div class="alerta_erro">
-
-        <div class="card_erro" id="cardErro">
-
-            <span id="mensagem_erro"></span>
-
-        </div>
-
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
     </div>
 
     <div class="alinhar">
+      <div class="containerlec">
+        <div class="campos">
+          <div class="mensagem">
+            <img src="./assets/1.png" alt="" /> <br />
+            <span>Vamos começar!</span> <br />
+            <p>Bem vindo a NutriLab - Entre na sua conta aqui</p>
+          </div>
+          <div class="inputs">
+            <span>Email:</span>
+            <input type="text" id="ipt_email" />
+            <span>Senha:</span>
+            <input type="text" id="ipt_senha" />
 
-        <div class="containerlec">
+            <button onclick="entrar()">Entrar</button>
 
-            <div class="campos">
-                <div class="mensagem">
-                    <img src="./assets/1.png" alt=""> <br>
-                    <span>Vamos começar!</span> <br>
-                    <p>Bem vindo a NutriLab - Entre na sua conta aqui</p>
-                </div>
-                <div class="inputs">
-                    <span>Email:</span>
-                    <input type="text" id="ipt_email">
-                    <span>Senha:</span>
-                    <input type="text" id="ipt_senha">
+            <span class="pergunta"
+              >Não possui uma conta?
+              <a href="./cadastro.html"
+                ><b style="color: #519758">Cadastre-se</b></a
+              ></span
+            >
+          </div>
 
-
-                    <button onclick="entrar()"> Entrar </button>
-
-                    <span class="pergunta">Não possui uma conta? <a href="./cadastro.html"><b
-                                style="color: #519758;">Cadastre-se</b></a></span>
-
-                </div>
-
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/loading-verde.gif" id="loading-gif">
-                </div>
-
-            </div>
-
-            <div class="apresentacao">
-                <img src="./assets/2.png" alt="">
-                <span class="titulo">NutriLab</span>
-                <span>Saúde em cada refeição</span>
-                <button onclick="home()" class="home"> Home </button>
-            </div>
-
+          <div id="div_aguardar" class="loading-div">
+            <img src="./assets/loading-verde.gif" id="loading-gif" />
+          </div>
         </div>
 
-        <div class="footer">
-
-            <img src="./assets/2.png" alt="" style="width: 100px;">
-            <span> © 2024 NutriLab All Rights Reserved </span>
-
-
+        <div class="apresentacao">
+          <img src="./assets/2.png" alt="" />
+          <span class="titulo">NutriLab</span>
+          <span>Saúde em cada refeição</span>
+          <button onclick="home()" class="home">Home</button>
         </div>
+      </div>
 
+      <div class="footer">
+        <img src="./assets/2.png" alt="" style="width: 100px" />
+        <span> © 2024 NutriLab All Rights Reserved </span>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
+  function home() {
+    window.location.href = "index.html";
+  }
 
-    function home() {
-        window.location.href = 'index.html'
+  function entrar() {
+    aguardar();
+
+    mensagem_erro.innerHTML = "";
+
+    var emailVar = ipt_email.value;
+    var senhaVar = ipt_senha.value;
+
+    if (emailVar == "" || senhaVar == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Preencha todos os campos`;
+
+      finalizarAguardar();
+      setTimeout(sumirMensagem, 2000);
+      return false;
+    } else {
+      setInterval(sumirMensagem, 2000);
     }
 
-    function entrar() {
-        aguardar();
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
 
-        mensagem_erro.innerHTML = ""
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
 
-        var emailVar = ipt_email.value;
-        var senhaVar = ipt_senha.value;
+        if (resposta.ok) {
+          console.log(resposta);
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Preencha todos os campos`;
-            
-            finalizarAguardar();
-            setTimeout(sumirMensagem, 2000);
-            return false;
+          resposta.json().then((json) => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.TELEFONE_USUARIO = json.telefone;
+            sessionStorage.DATA_USUARIO = json.data;
+            sessionStorage.ID_USUARIO = json.id;
 
-            
+            cardErro.style.display = "flex";
+            mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Login realizado com sucesso! Redirecionando para a tela de perfil`;
+
+            setTimeout(function () {
+              window.location.href = "./perfil.html";
+            }, 1000); // apenas para exibir o loading
+          });
+        } else {
+          cardErro.style.display = "flex";
+          mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Houve um erro ao tentar realizar o login`;
+
+          console.log("Houve um erro ao tentar realizar o login!");
+
+          resposta.text().then((texto) => {
+            console.error(texto);
+            finalizarAguardar(texto);
+          });
         }
-        else {
-            setInterval(sumirMensagem, 2000)
-        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+    return false;
+  }
 
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.TELEFONE_USUARIO = json.telefone;
-                    sessionStorage.DATA_USUARIO = json.data;
-                    sessionStorage.ID_USUARIO = json.id
-
-                    cardErro.style.display = "flex"
-                    mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Login realizado com sucesso! Redirecionando para a tela de perfil`
-
-                    setTimeout(function () {
-                        window.location.href = "./perfil.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                cardErro.style.display = "flex"
-                mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Houve um erro ao tentar realizar o login`
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
-
-
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
 </script>
