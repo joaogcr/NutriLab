@@ -73,6 +73,7 @@ body {
     font-weight: 550;
     font-size: 20px;
     border-radius: 60px;
+    cursor: pointer;
 }
 
 .botao2 button {
@@ -84,6 +85,7 @@ body {
     font-weight: 550;
     font-size: 20px;
     border-radius: 60px;
+    cursor: pointer;
 }
 
 .botao2 a {
@@ -282,12 +284,14 @@ body {
     height: 60%;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .title .redes button img {
     width: 30%;
     margin-right: 3%;
     margin-bottom: 3px;
+    cursor: pointer;
 }
 
 
@@ -533,6 +537,7 @@ html {
     font-size: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 
 .erro-msg {
@@ -571,6 +576,7 @@ html {
     color: #fff;
     background-color: #519758;
     width: 50%;
+    cursor: pointer;
 }
 
 #div_resultadoget {
@@ -623,6 +629,7 @@ html {
     font-weight: 600;
     font-size: 20px;
     margin-top: 30px;
+    cursor: pointer;
 }
 
 #div_resultado {

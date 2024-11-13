@@ -33,6 +33,12 @@
     </div>
   </div>
 
+  <div class="alerta_erro">
+    <div class="card_erro" id="cardErro">
+      <span id="mensagem_erro"></span>
+    </div>
+  </div>
+
   <div class="alinhar">
     <div class="containerperfil" id="div_perfil">
       <h1>Perfil</h1>
@@ -108,20 +114,20 @@
           <div class="graficoimc" style="height: 50vh; width: 50vw">
             <canvas id="myChart2"></canvas>
           </div>
-            <div class="pesos">
-              <button>Atualizar</button>
-            </div>
+          <div class="pesos">
+            <button>Atualizar</button>
           </div>
-
         </div>
 
       </div>
-    </div>
 
-    <div class="footer">
-      <img src="./assets/2.png" alt="" style="width: 100px" />
-      <span> © 2024 NutriLab All Rights Reserved </span>
     </div>
+  </div>
+
+  <div class="footer">
+    <img src="./assets/2.png" alt="" style="width: 100px" />
+    <span> © 2024 NutriLab All Rights Reserved </span>
+  </div>
   </div>
 </body>
 
@@ -135,7 +141,14 @@
     var confirmaVar = ipt_confirmasenha.value;
     var emailVerificacao = emailVar.includes("@") && emailVar.includes(".") && emailVar.endsWith(".com");
 
-    if (senhaVar != confirmaVar || !emailVerificacao || senhaVar < 8) {
+    ipt_confirmasenha.style.borderColor = "";
+    div_erro5.style.display = "none";
+    ipt_email.style.borderColor = "";
+    div_erro3.style.display = "none";
+    ipt_senha.style.borderColor = "";
+    div_erro4.style.display = "none";
+
+    if (senhaVar != confirmaVar || !emailVerificacao || senhaVar.length < 8) {
       if (senhaVar != confirmaVar) {
         ipt_confirmasenha.style.borderColor = "red";
         div_erro5.style.display = "block";
@@ -149,6 +162,11 @@
         div_erro4.style.display = "block";
       }
     } else {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""><br>Dados atualizados com sucesso!`;
+
+      setTimeout(sumirMensagem, 2000);
+
       ipt_confirmasenha.style.borderColor = "";
       div_erro5.style.display = "none";
 
@@ -263,9 +281,10 @@
       botao2.style.border = "solid 3px #519758";
     });
   }
-</script>
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
 
-<script>
   const labels = [
     "05/2024",
     "06/2024",
@@ -293,13 +312,13 @@
     type: "line",
     data: data,
     options: {
-    scales: {
-      y: {
-        min: 0,
-        max: maxY2
+      scales: {
+        y: {
+          min: 0,
+          max: maxY2
+        },
       },
     },
-  },
   };
 
   const labels2 = [
@@ -329,13 +348,13 @@
     type: "line",
     data: data2,
     options: {
-    scales: {
-      y: {
-        min: 0,
-        max: maxY
+      scales: {
+        y: {
+          min: 0,
+          max: maxY
+        },
       },
     },
-  },
   };
 
   const myChart = new Chart(document.getElementById("myChart"), config);
