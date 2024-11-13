@@ -58,39 +58,47 @@
           <div class="inputsalteracao">
             <span>Email: </span>
             <input type="text" id="ipt_email" placeholder="Altere seu email" />
+            <div id="div_erro3" class="erro-msg">
+              O email deve conter '@' e '.com'
+            </div>
 
             <span>Senha: </span>
-            <input type="text" id="ipt_senha" placeholder="Altere uma senha" />
+            <input type="text" id="ipt_senha" placeholder="Altere sua senha" />
+            <div id="div_erro4" class="erro-msg">
+              A senha deve ter pelo menos 8 caracteres
+            </div>
 
             <span>Confirme sua senha: </span>
-            <input
-              type="text"
-              id="ipt_confirmasenha"
-              placeholder="Confirme sua senha"
-            />
+            <input type="text" id="ipt_confirmasenha" placeholder="Confirme sua senha"/>
+            <div id="div_erro5" class="erro-msg">As senhas não coincidem</div>
           </div>
 
           <button class="botoesperfil" onclick="editar()">Alterar dados</button>
         </div>
         <div id="div_camposevolucao">
-            <div class="miniperfil" id="div_dados">
-                <img src="./assets/perfil.png" alt="" />
-                <span id="b_usuario2">Fulano</span><br>
-                <span>Gráfico de Evolução Corporal</span>
-            </div>
+          <div class="miniperfil" id="div_dados">
+            <img src="./assets/perfil.png" alt="" />
+            <span id="b_usuario2">Fulano</span><br />
+            <span>Gráfico de Evolução Corporal</span>
+          </div>
 
           <div class="graficopeso" style="height: 50vh; width: 50vw">
             <canvas id="myChart"></canvas>
           </div>
           <div class="pesos">
             <div class="camposinserir">
-            <span>Peso atual: </span><input type="number" id="ipt_peso" placeholder="Insira seu peso">
-            <span>Data: </span><input type="date" id="ipt_data">
-        </div>
-        <div class="botaoinserir">
-            <button>Inserir</button>
-        </div>
-        </div>
+              <span>Peso atual: </span
+              ><input
+                type="number"
+                id="ipt_peso"
+                placeholder="Insira seu peso"
+              />
+              <span>Data: </span><input type="date" id="ipt_data" />
+            </div>
+            <div class="botaoinserir">
+              <button>Inserir</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -103,38 +111,45 @@
 </html>
 
 <script>
-//   function editar() {
-//     fetch(`/avisos/editar/${sessionStorage.getItem("EMAIL_USUARIO")}`, {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         email: ipt_email.value,
-//         senha: ipt_senha.value,
-//       }),
-//     })
-//       .then(function (resposta) {
-//         if (resposta.ok) {
-//           window.alert(
-//             "Post atualizado com sucesso pelo usuario de email: " +
-//               sessionStorage.getItem("EMAIL_USUARIO") +
-//               "!"
-//           );
-//           window.location = "/perfil.html";
-//         } else if (resposta.status == 404) {
-//           window.alert("Deu 404!");
-//         } else {
-//           throw (
-//             "Houve um erro ao tentar realizar a postagem! Código da resposta: " +
-//             resposta.status
-//           );
-//         }
-//       })
-//       .catch(function (resposta) {
-//         console.log(`#ERRO: ${resposta}`);
-//       });
-//   }
+  function editar() {
+    var emailVar = ipt_email.value;
+    var senhaVar = ipt_senha.value;
+    var idVar = sessionStorage.ID_USUARIO;
+    var confirmaVar = ipt_confirmasenha.value;
+    var emailVerificacao = emailVar.includes("@") && emailVar.includes(".") && emailVar.endsWith(".com");
+
+    if (senhaVar != confirmaVar || !emailVerificacao || senhaVar < 8) {
+      if(senhaVar != confirmaVar) {
+      ipt_confirmasenha.style.borderColor = "red";
+      div_erro5.style.display = "block";
+      }
+      if(!emailVerificacao) {
+        ipt_email.style.borderColor = "red";
+        div_erro3.style.display = "block";
+      }
+      if(senhaVar.length < 8) {
+        ipt_senha.style.borderColor = "red";
+        div_erro4.style.display = "block";
+      }
+    } else {
+      ipt_confirmasenha.style.borderColor = "";
+      div_erro5.style.display = "none";
+
+      fetch("/usuarios/editar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+          idServer: idVar,
+        }),
+      });
+    }
+  }
 
   function evolucao() {
     div_camposperfil.style.display = "none";
@@ -142,19 +157,18 @@
 
     const botoes = document.querySelectorAll(".botoesperfil2");
     const botoes2 = document.querySelectorAll(".botoesperfil");
-            // Itera por todos os botões selecionados e alterna o display
-            botoes.forEach(botao => {
-                botao.style.backgroundColor = "#519758"
-                botao.style.color = "#fff"
-                botao.style.border = "solid 3px #519758"
-            });
+    // Itera por todos os botões selecionados e alterna o display
+    botoes.forEach((botao) => {
+      botao.style.backgroundColor = "#519758";
+      botao.style.color = "#fff";
+      botao.style.border = "solid 3px #519758";
+    });
 
-            botoes2.forEach(botao2 => {
-                botao2.style.backgroundColor = "#fff"
-                botao2.style.color = "#519758"
-                botao2.style.border = "solid 3px #519758"
-            });
-
+    botoes2.forEach((botao2) => {
+      botao2.style.backgroundColor = "#fff";
+      botao2.style.color = "#519758";
+      botao2.style.border = "solid 3px #519758";
+    });
   }
 
   function validar() {
@@ -167,11 +181,11 @@
     var b_email = document.getElementById("b_email");
     var b_telefone = document.getElementById("b_telefone");
 
-    b_email.innerHTML = email
-    b_telefone.innerHTML = telefone
-    b_usuario.innerHTML = nome
-    b_usuario2.innerHTML = nome
-}
+    b_email.innerHTML = email;
+    b_telefone.innerHTML = telefone;
+    b_usuario.innerHTML = nome;
+    b_usuario2.innerHTML = nome;
+  }
 
   function dados() {
     div_camposperfil.style.display = "flex";
@@ -180,18 +194,17 @@
     const botoes = document.querySelectorAll(".botoesperfil2");
     const botoes2 = document.querySelectorAll(".botoesperfil");
 
-    botoes.forEach(botao => {
-        botao.style.backgroundColor = "#fff";
-        botao.style.color = "#519758";
-        botao.style.border = "solid 3px #519758";
+    botoes.forEach((botao) => {
+      botao.style.backgroundColor = "#fff";
+      botao.style.color = "#519758";
+      botao.style.border = "solid 3px #519758";
     });
 
-    botoes2.forEach(botao2 => {
-        botao2.style.backgroundColor = "#519758";
-        botao2.style.color = "#fff";
-        botao2.style.border = "solid 3px #519758";
+    botoes2.forEach((botao2) => {
+      botao2.style.backgroundColor = "#519758";
+      botao2.style.color = "#fff";
+      botao2.style.border = "solid 3px #519758";
     });
-
   }
 </script>
 

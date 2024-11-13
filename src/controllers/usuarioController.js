@@ -107,8 +107,31 @@ function calcularimc(req, res) {
     );
 }
 
+function editar(req, res) {
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
+    var id = req.body.idServer;
+
+    usuarioModel.editar(email, senha, id)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao editar os dados! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    calcularimc
+    calcularimc,
+    editar
 }

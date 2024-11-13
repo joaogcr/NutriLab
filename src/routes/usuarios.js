@@ -15,4 +15,8 @@ router.post("/calcularimc", function (req, res) {
     usuarioController.calcularimc(req, res);
 });
 
+router.post("/editar", function (req, res) {
+    usuarioController.editar(req, res);
+});
+
 module.exports = router;
