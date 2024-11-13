@@ -756,6 +756,32 @@ html {
     cursor: pointer;
   }
 
+  .botoesperfil3 {
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    border: none;
+    background-color: #519758;
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .botoesperfil4 {
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    border: solid 3px #519758;
+    background-color: #fff;
+    color: #519758;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
   .alinharbotoes {
     display: flex;
     justify-content: space-between;
@@ -946,4 +972,15 @@ html {
     justify-content: center;
     width: 54%;
     margin-left: 10px
+}
+
+#div_exibirimc {
+    display: none;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+#div_exibirpeso {
+    display: flex;
+    flex-direction: column;
 }

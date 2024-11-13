@@ -1,113 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NutriLab</title>
-    <link rel="icon" href="./assets/2.png" type="image/x-icon" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="./js/sessao.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
 
-  <body onload="validar()">
-    <div class="navbar">
-      <div class="logonavbar">
-        <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NutriLab</title>
+  <link rel="icon" href="./assets/2.png" type="image/x-icon" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="./js/sessao.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
-      <div class="itens">
-        <a href="./imc.html"><span>IMC</span></a>
-        <a href="./tmb.html"><span>TMB</span></a>
-        <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
-      </div>
-
-      <div class="botoes">
-        <div class="botao2">
-          <button onclick="sair()">
-            <a href="./index.html"><span>Home</span></a>
-          </button>
-        </div>
-      </div>
+<body onload="validar()">
+  <div class="navbar">
+    <div class="logonavbar">
+      <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
     </div>
 
-    <div class="alinhar">
-      <div class="containerperfil" id="div_perfil">
-        <h1>Perfil</h1>
+    <div class="itens">
+      <a href="./imc.html"><span>IMC</span></a>
+      <a href="./tmb.html"><span>TMB</span></a>
+      <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
+    </div>
 
-        <div class="alinharbotoes">
-          <button class="botoesperfil" onclick="dados()">Dados Pessoais</button>
-          <button class="botoesperfil2" onclick="evolucao()">
-            Evolução Corporal
-          </button>
+    <div class="botoes">
+      <div class="botao2">
+        <button onclick="sair()">
+          <a href="./index.html"><span>Home</span></a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="alinhar">
+    <div class="containerperfil" id="div_perfil">
+      <h1>Perfil</h1>
+
+      <div class="alinharbotoes">
+        <button class="botoesperfil" onclick="dados()">Dados Pessoais</button>
+        <button class="botoesperfil2" onclick="evolucao()">
+          Evolução Corporal
+        </button>
+      </div>
+
+      <div id="div_camposperfil">
+        <img src="./assets/perfil.png" alt="" />
+
+        <div class="dadosperfil">
+          <h1 id="b_usuario">Fulano</h1>
+          <span id="b_email">Email: <span>email@email.com</span></span>
+          <span id="b_telefone">Telefone: <span>11977573100</span></span>
         </div>
 
-        <div id="div_camposperfil">
+        <div class="inputsalteracao">
+          <span>Email: </span>
+          <input type="text" id="ipt_email" placeholder="Altere seu email" />
+          <div id="div_erro3" class="erro-msg">
+            O email deve conter '@' e '.com'
+          </div>
+
+          <span>Senha: </span>
+          <input type="text" id="ipt_senha" placeholder="Altere sua senha" />
+          <div id="div_erro4" class="erro-msg">
+            A senha deve ter pelo menos 8 caracteres
+          </div>
+
+          <span>Confirme sua senha: </span>
+          <input type="text" id="ipt_confirmasenha" placeholder="Confirme sua senha" />
+          <div id="div_erro5" class="erro-msg">As senhas não coincidem</div>
+        </div>
+
+        <button class="botoesperfil" onclick="editar()">Alterar dados</button>
+      </div>
+      <div id="div_camposevolucao">
+
+        <div class="miniperfil" id="div_dados">
           <img src="./assets/perfil.png" alt="" />
-
-          <div class="dadosperfil">
-            <h1 id="b_usuario">Fulano</h1>
-            <span id="b_email">Email: <span>email@email.com</span></span>
-            <span id="b_telefone">Telefone: <span>11977573100</span></span>
+          <span id="b_usuario2">Fulano</span><br />
+          <span>Gráficos de Evolução Corporal</span>
+          <div class="alinharbotoes">
+            <button onclick="exibirpeso()" class="botoesperfil3">Peso</button>
+            <button onclick="exibirimc()" class="botoesperfil4">IMC</button>
           </div>
-
-          <div class="inputsalteracao">
-            <span>Email: </span>
-            <input type="text" id="ipt_email" placeholder="Altere seu email" />
-            <div id="div_erro3" class="erro-msg">
-              O email deve conter '@' e '.com'
-            </div>
-
-            <span>Senha: </span>
-            <input type="text" id="ipt_senha" placeholder="Altere sua senha" />
-            <div id="div_erro4" class="erro-msg">
-              A senha deve ter pelo menos 8 caracteres
-            </div>
-
-            <span>Confirme sua senha: </span>
-            <input type="text" id="ipt_confirmasenha" placeholder="Confirme sua senha"/>
-            <div id="div_erro5" class="erro-msg">As senhas não coincidem</div>
-          </div>
-
-          <button class="botoesperfil" onclick="editar()">Alterar dados</button>
         </div>
-        <div id="div_camposevolucao">
-          <div class="miniperfil" id="div_dados">
-            <img src="./assets/perfil.png" alt="" />
-            <span id="b_usuario2">Fulano</span><br />
-            <span>Gráfico de Evolução Corporal</span>
-          </div>
+
+        <div id="div_exibirpeso">
 
           <div class="graficopeso" style="height: 50vh; width: 50vw">
             <canvas id="myChart"></canvas>
           </div>
           <div class="pesos">
             <div class="camposinserir">
-              <span>Peso atual: </span
-              ><input
-                type="number"
-                id="ipt_peso"
-                placeholder="Insira seu peso"
-              />
+              <span>Peso atual: </span>
+              <input type="number" id="ipt_peso" placeholder="Insira seu peso" />
               <span>Data: </span><input type="date" id="ipt_data" />
             </div>
-            <div class="botaoinserir">
+            <div>
               <button>Inserir</button>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="footer">
-        <img src="./assets/2.png" alt="" style="width: 100px" />
-        <span> © 2024 NutriLab All Rights Reserved </span>
+        </div>
+
+        <div id="div_exibirimc">
+
+          <div class="graficoimc" style="height: 50vh; width: 50vw">
+            <canvas id="myChart2"></canvas>
+          </div>
+            <div class="pesos">
+              <button>Atualizar</button>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
-  </body>
+
+    <div class="footer">
+      <img src="./assets/2.png" alt="" style="width: 100px" />
+      <span> © 2024 NutriLab All Rights Reserved </span>
+    </div>
+  </div>
+</body>
+
 </html>
 
 <script>
@@ -119,15 +136,15 @@
     var emailVerificacao = emailVar.includes("@") && emailVar.includes(".") && emailVar.endsWith(".com");
 
     if (senhaVar != confirmaVar || !emailVerificacao || senhaVar < 8) {
-      if(senhaVar != confirmaVar) {
-      ipt_confirmasenha.style.borderColor = "red";
-      div_erro5.style.display = "block";
+      if (senhaVar != confirmaVar) {
+        ipt_confirmasenha.style.borderColor = "red";
+        div_erro5.style.display = "block";
       }
-      if(!emailVerificacao) {
+      if (!emailVerificacao) {
         ipt_email.style.borderColor = "red";
         div_erro3.style.display = "block";
       }
-      if(senhaVar.length < 8) {
+      if (senhaVar.length < 8) {
         ipt_senha.style.borderColor = "red";
         div_erro4.style.display = "block";
       }
@@ -206,6 +223,46 @@
       botao2.style.border = "solid 3px #519758";
     });
   }
+
+  function exibirpeso() {
+    div_exibirimc.style.display = "none";
+    div_exibirpeso.style.display = "flex";
+
+    const botoes = document.querySelectorAll(".botoesperfil3");
+    const botoes2 = document.querySelectorAll(".botoesperfil4");
+    // Itera por todos os botões selecionados e alterna o display
+    botoes.forEach((botao) => {
+      botao.style.backgroundColor = "#519758";
+      botao.style.color = "#fff";
+      botao.style.border = "solid 3px #519758";
+    });
+
+    botoes2.forEach((botao2) => {
+      botao2.style.backgroundColor = "#fff";
+      botao2.style.color = "#519758";
+      botao2.style.border = "solid 3px #519758";
+    });
+  }
+
+  function exibirimc() {
+    div_exibirimc.style.display = "flex";
+    div_exibirpeso.style.display = "none";
+
+    const botoes = document.querySelectorAll(".botoesperfil4");
+    const botoes2 = document.querySelectorAll(".botoesperfil3");
+    // Itera por todos os botões selecionados e alterna o display
+    botoes.forEach((botao) => {
+      botao.style.backgroundColor = "#519758";
+      botao.style.color = "#fff";
+      botao.style.border = "solid 3px #519758";
+    });
+
+    botoes2.forEach((botao2) => {
+      botao2.style.backgroundColor = "#fff";
+      botao2.style.color = "#519758";
+      botao2.style.border = "solid 3px #519758";
+    });
+  }
 </script>
 
 <script>
@@ -230,13 +287,57 @@
     ],
   };
 
+  const maxY2 = parseInt(Math.max(...data.datasets[0].data) + 10);
+
   const config = {
     type: "line",
     data: data,
-    options: {},
+    options: {
+    scales: {
+      y: {
+        min: 0,
+        max: maxY2
+      },
+    },
+  },
   };
-</script>
 
-<script>
+  const labels2 = [
+    "05/2024",
+    "06/2024",
+    "07/2024",
+    "08/2024",
+    "09/2024",
+    "10/2024",
+  ];
+
+  const data2 = {
+    labels: labels,
+    datasets: [
+      {
+        label: "IMC",
+        backgroundColor: "#519758",
+        borderColor: "#519758",
+        data: [22.3, 25.2, 25, 26.5, 22, 23.5],
+      },
+    ],
+  };
+
+  const maxY = parseInt(Math.max(...data2.datasets[0].data) + 10);
+
+  const config2 = {
+    type: "line",
+    data: data2,
+    options: {
+    scales: {
+      y: {
+        min: 0,
+        max: maxY
+      },
+    },
+  },
+  };
+
   const myChart = new Chart(document.getElementById("myChart"), config);
+  const myChart2 = new Chart(document.getElementById("myChart2"), config2);
 </script>
