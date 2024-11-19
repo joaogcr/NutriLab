@@ -18,6 +18,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var pesoRouter = require("./src/routes/peso");
+var imcRouter = require("./src/routes/imc");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +29,7 @@ app.use(cors());
 app.use("/index", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/peso", pesoRouter);
+app.use("/imc", imcRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

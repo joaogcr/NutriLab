@@ -12,7 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="validar(), obterDadosGrafico();"
+<body onload="validar(), obterDadosGrafico(); obterDadosGrafico2()"
 >
 <!--  -->
   <div class="navbar">
@@ -121,7 +121,7 @@
         <div id="div_exibirimc">
 
           <div class="graficoimc" style="height: 50vh; width: 50vw">
-            <canvas id="myChart2"></canvas>
+            <canvas id="myChartCanvas2"></canvas>
           </div>
           <div class="pesos">
             <button>Atualizar</button>
@@ -356,7 +356,7 @@
     let dados = {
       labels: labels,
       datasets: [{
-        label: 'peso',
+        label: 'Peso',
         data: [],
         fill: false,
         backgroundColor: "#519758",
@@ -464,5 +464,150 @@
       });
 
   }
+
+  function obterDadosGrafico2(){
+
+fetch(`http://localhost:3333/imc/ultimas/${sessionStorage.ID_USUARIO}`).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (resposta) {
+      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+      resposta.reverse();
+
+      plotarGrafico2(resposta, idUsuario);
+
+    });
+  } else {
+    console.error('Nenhum dado encontrado ou erro na API');
+  }
+})
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+}
+
+  
+
+// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+// Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+// A função *plotarGrafico* também invoca a função *atualizarGrafico*
+function plotarGrafico2(resposta, idUsuario) {
+
+console.log('iniciando plotagem do gráfico...');
+
+// Criando estrutura para plotar gráfico - labels
+let labels = [];
+
+// Criando estrutura para plotar gráfico - dados
+let dados = {
+  labels: labels,
+  datasets: [{
+    label: 'IMC',
+    data: [],
+    fill: false,
+    backgroundColor: "#519758",
+    borderColor: "#519758",
+    tension: 0.1
+  }]
+};
+
+console.log('----------------------------------------------')
+console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+for (i = 0; i < resposta.length; i++) {
+  var registro = resposta[i];
+  labels.push(registro.dtImc);
+  dados.datasets[0].data.push(registro.imc);
+}
+
+console.log('----------------------------------------------')
+console.log('O gráfico será plotado com os respectivos valores:')
+console.log('Labels:')
+console.log(labels)
+console.log('Dados:')
+console.log(dados.datasets)
+console.log('----------------------------------------------')
+
+const maxY = parseInt(Math.max(...dados.datasets[0].data) + 10);
+
+// Criando estrutura para plotar gráfico - config
+const config = {
+  type: 'line',
+  data: dados,
+  options: {
+    scales: {
+      y: {
+        min: 0,
+        max: maxY
+      },
+    },
+  },
+};
+
+// Adicionando gráfico criado em div na tela
+let myChart = new Chart(
+  document.getElementById(`myChartCanvas2`),
+  config
+);
+
+setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
+}
+
+// Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+// buscando a última medida inserida em tabela contendo as capturas, 
+
+//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+//     Para ajustar o "select", ajuste o comando sql em src/models
+function atualizarGrafico(idUsuario, dados, myChart) {
+
+fetch(`/imc/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (novoRegistro) {
+
+      obterDadosGrafico2(idUsuario);
+      // alertar(novoRegistro, idUsuario);
+      console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+      console.log(`Dados atuais do gráfico:`);
+      console.log(dados);
+
+      let avisoCaptura = document.getElementById(`avisoCaptura${idUsuario}`)
+      avisoCaptura.innerHTML = ""
+
+
+      if (novoRegistro[0].dtImc == dados.labels[dados.labels.length - 1]) {
+        console.log("---------------------------------------------------------------")
+        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+        console.log("Horário do novo dado capturado:")
+        console.log(novoRegistro[0].dtImc)
+        console.log("Horário do último dado capturado:")
+        console.log(dados.labels[dados.labels.length - 1])
+        console.log("---------------------------------------------------------------")
+      } else {
+        // tirando e colocando valores no gráfico
+        dados.labels.shift(); // apagar o primeiro
+        dados.labels.push(novoRegistro[0].dtImc); // incluir um novo momento
+
+        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+        dados.datasets[0].data.push(novoRegistro[0].imc); // incluir uma nova medida de umidade
+
+        myChart.update();
+      }
+
+      // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+      proximaAtualizacao = setTimeout(() => atualizarGrafico2(idUsuario, dados, myChart), 2000);
+    });
+  } else {
+    console.error('Nenhum dado encontrado ou erro na API');
+    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+    proximaAtualizacao = setTimeout(() => atualizarGrafico2(idUsuario, dados, myChart), 2000);
+  }
+})
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+
+}
 
 </script>
