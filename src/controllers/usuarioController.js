@@ -107,6 +107,28 @@ function calcularimc(req, res) {
     );
 }
 
+function inserirpeso(req, res) {
+    var peso = req.body.pesoServer;
+    var id = req.body.idServer;
+    var data = req.body.dataServer
+
+    usuarioModel.inserirpeso(peso, id, data)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao registrar o peso! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 function editar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -133,5 +155,6 @@ module.exports = {
     autenticar,
     cadastrar,
     calcularimc,
-    editar
+    editar,
+    inserirpeso
 }

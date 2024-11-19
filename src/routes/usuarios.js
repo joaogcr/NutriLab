@@ -19,4 +19,8 @@ router.post("/editar", function (req, res) {
     usuarioController.editar(req, res);
 });
 
+router.post("/inserirpeso", function (req, res) {
+    usuarioController.inserirpeso(req, res);
+});
+
 module.exports = router;

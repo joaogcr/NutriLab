@@ -29,6 +29,13 @@ function calcularimc(imc, id) {
 return database.executar(instrucaoSql);
 }
 
+function inserirpeso(peso, id, data) {
+    var instrucaoSql = `
+    INSERT INTO peso (peso, dtPeso, fkUsuario) VALUES (${peso}, '${data}', '${id}');
+`;
+return database.executar(instrucaoSql);
+}
+
 function editar(email, senha, id) {
     var instrucaoSql = `
     UPDATE usuario SET email = '${email}', senha = '${senha}' WHERE id = ${id};
@@ -40,5 +47,6 @@ module.exports = {
     autenticar,
     cadastrar,
     calcularimc,
-    editar
+    editar,
+    inserirpeso
 };

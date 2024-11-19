@@ -35,7 +35,7 @@
 
     <div class="calculadorafixa" id="div_calculadora">
       <h1>Taxa Metabólica Basal (TMB)</h1>
-      <span
+      <span style="text-align: justify;"
         >A Taxa Metabólica Basal (TMB) é a quantidade de energia (calorias) que
         o corpo precisa para realizar suas funções básicas enquanto está em
         repouso. Essas funções incluem respiração, circulação sanguínea,
@@ -102,14 +102,16 @@
     div_resultado.innerHTML = `
           <h1>O resultado da sua TMB é ${tmb.toFixed(0)} kcal/dia</h1>
 
-      <span>
+      <span style="text-align: justify;">
         Depois de calcular sua Taxa Metabólica Basal (TMB), você pode usá-la
         como base para determinar o número total de calorias que deve consumir
         diariamente, levando em consideração seu nível de atividade física e
         seus objetivos de saúde. Veja os passos que você pode seguir:
-        <br /><br />
-        <h1>Calcular o Gasto Energético Diário Total (GET)</h1>
+      </span>
+
         <br />
+        <h1>Calcular o Gasto Energético Diário Total (GET)</h1>
+              <span style="text-align: justify;">
         A TMB é apenas o número de calorias que o corpo precisa em repouso. Para
         obter o Gasto Energético Diário Total (GET), que inclui as calorias
         gastas com atividades físicas e digestão, é necessário multiplicar a TMB
@@ -163,7 +165,7 @@
     div_resultadoget.innerHTML = `
     <h1>O resultado do seu GET é ${get.toFixed(0)} kcal/dia</h1>
 
-        <span>
+        <span style="text-align: justify;">
           <b>Ajustar as calorias de acordo com seus objetivos</b>
           <br /><br />
           Dependendo de seus objetivos de saúde, você pode ajustar o número

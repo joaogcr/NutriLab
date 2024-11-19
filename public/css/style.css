@@ -298,6 +298,8 @@ body {
 .descricaosobremim {
     width: 80%;
     padding-top: 3%;
+    display: flex;
+    text-align: justify;
 }
 
 .footer {
