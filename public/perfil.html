@@ -41,6 +41,12 @@
     </div>
   </div>
 
+  <div class="alerta_erro">
+    <div class="card_erro" id="cardErro">
+      <span id="mensagem_erro"></span>
+    </div>
+  </div>
+
   <div class="alinhar">
     <div class="containerperfil" id="div_perfil">
       <h1>Perfil</h1>
@@ -107,6 +113,7 @@
             <div>
               <button onclick="inserirpeso()">Inserir</button>
             </div>
+            <div id="div_msgpeso"></div>
           </div>
 
         </div>
@@ -292,8 +299,6 @@
     var pesoVar = ipt_peso.value
     var idVar = sessionStorage.ID_USUARIO
     var dataVar = ipt_data.value
-
-    console.log(idVar)
     
     fetch("/usuarios/inserirpeso", {
       method: "POST",
@@ -308,6 +313,8 @@
         idServer: idVar
       }),
     })
+
+    div_msgpeso.innerHTML = `Peso inserido com sucesso, recarregue a página!`
   }
   var idUsuario = sessionStorage.ID_USUARIO
   // console.log(idUsuario)
@@ -458,7 +465,4 @@
 
   }
 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
 </script>
