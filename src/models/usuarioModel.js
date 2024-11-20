@@ -12,7 +12,7 @@ function autenticar(email, senha) {
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha, telefone, data) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, telefone, data);
-    
+
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
@@ -26,21 +26,21 @@ function calcularimc(imc, id) {
     var instrucaoSql = `
     INSERT INTO imc (imc, dtImc, fkUsuario) VALUES ('${imc}', now(), '${id}');
 `;
-return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 function inserirpeso(peso, id, data) {
     var instrucaoSql = `
     INSERT INTO peso (peso, dtPeso, fkUsuario) VALUES (${peso}, '${data}', '${id}');
 `;
-return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 function editar(email, senha, id) {
     var instrucaoSql = `
     UPDATE usuario SET email = '${email}', senha = '${senha}' WHERE id = ${id};
 `;
-return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 module.exports = {

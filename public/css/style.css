@@ -993,3 +993,45 @@ html {
     display: flex;
     flex-direction: column;
 }
+
+.kpis {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    border: #48674B;
+    padding-top: 20px;
+}
+
+.kpis .maiorpeso{
+    background-color: #519758;
+    color: #fff;
+    padding: 20px;
+    width: 20%;
+    height: 15%;
+    font-size: 20px;
+    border-radius: 30px;
+}
+
+.kpis .menorpeso{
+    background-color: #519758;
+    border-radius: 30px;
+    padding: 20px;
+    width: 20%;
+    color: #fff;
+    font-size: 20px;
+}
+
+.kpis .diferencapeso{
+    border-radius: 30px;
+    background-color: #519758;
+    padding: 20px;
+    width: 20%;
+    color: #fff;
+    font-size: 20px;
+}
+
+.numerokpi {
+    font-size: 40px;
+    font-weight: 800;
+}
