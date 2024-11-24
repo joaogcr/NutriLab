@@ -12,7 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="validar(), obterDadosGrafico(); obterDadosGrafico2(); obterDadosKpi1()">
+<body onload="validar(), obterDadosGrafico(); obterDadosGrafico2(); obterDadosKpi()">
   <!--  -->
   <div class="navbar">
     <div class="logonavbar">
@@ -103,15 +103,15 @@
           <div class="kpis">
             <div class="maiorpeso">
               <span>Maior peso registrado:</span> <br> <br>
-              <span class="numerokpi" id="maior">50</span> kg
+              <span class="numerokpi" id="span_maiorPeso">50</span> kg
             </div>
             <div class="menorpeso">
               <span>Menor peso registrado:</span> <br> <br>
-              <span class="numerokpi" id="menor">30</span> kg
+              <span class="numerokpi" id="span_menorPeso">30</span> kg
             </div>
             <div class="diferencapeso">
               <span>Variação de peso:</span> <br> <br>
-              <span class="numerokpi" id="diferenca">20</span> kg
+              <span class="numerokpi" id="span_diferencaPeso">20</span> kg
             </div>
           </div>
 
@@ -137,15 +137,15 @@
           <div class="kpis" style="padding-top: 0;">
             <div class="maiorpeso">
               <span>Maior imc registrado:</span> <br> <br>
-              <span class="numerokpi" id="maior">50</span>
+              <span class="numerokpi" id="span_maiorImc">50</span>
             </div>
             <div class="menorpeso">
               <span>Menor imc registrado:</span> <br> <br>
-              <span class="numerokpi" id="menor">30</span>
+              <span class="numerokpi" id="span_menorImc">30</span>
             </div>
             <div class="diferencapeso">
               <span style="font-size: 16px;">Classificação do último imc:</span> <br> <br>
-              <span class="numerokpi" id="diferenca">Obesidade</span>
+              <span style="font-size: 33px;" class="numerokpi" id="span_classificacaoImc">Obesidade</span>
             </div>
           </div>
 
@@ -636,6 +636,100 @@
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
 
+  }
+
+  function obterDadosKpi() {
+
+    fetch(`http://localhost:3333/kpis/dadoskpi1/${sessionStorage.ID_USUARIO}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          span_maiorPeso.innerHTML = `${resposta[0].maiorPeso}`
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+      });
+
+      fetch(`http://localhost:3333/kpis/dadoskpi2/${sessionStorage.ID_USUARIO}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          span_menorPeso.innerHTML = `${resposta[0].menorPeso}`
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+      });
+
+      fetch(`http://localhost:3333/kpis/dadoskpi3/${sessionStorage.ID_USUARIO}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          span_diferencaPeso.innerHTML = `${resposta[0].diferencaPeso}`
+
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+      });
+
+      fetch(`http://localhost:3333/kpis/dadoskpi4/${sessionStorage.ID_USUARIO}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          span_maiorImc.innerHTML = `${resposta[0].maiorImc}`
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+      });
+
+      fetch(`http://localhost:3333/kpis/dadoskpi5/${sessionStorage.ID_USUARIO}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          span_menorImc.innerHTML = `${resposta[0].menorImc}`
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+      });
+
+      fetch(`http://localhost:3333/kpis/dadoskpi6/${sessionStorage.ID_USUARIO}`).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          span_classificacaoImc.innerHTML = `${resposta[0].classificacaoImc}`
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+      });
   }
 
 </script>

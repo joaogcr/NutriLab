@@ -19,6 +19,7 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var pesoRouter = require("./src/routes/peso");
 var imcRouter = require("./src/routes/imc");
+var kpisRouter = require("./src/routes/kpis");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +31,7 @@ app.use("/index", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/peso", pesoRouter);
 app.use("/imc", imcRouter);
+app.use("/kpis", kpisRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
