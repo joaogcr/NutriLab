@@ -8,6 +8,8 @@
     <link rel="icon" href="./assets/2.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 </head>
 
@@ -93,6 +95,16 @@
 
         </div>
 
+        <div class="pesquisa" id="div_pesquisa">
+            <h1>Resultados da pesquisa</h1>
+            <span style="text-align: justify;">Ao se cadastrar no site, o usuário é convidado a responder uma pesquisa,
+                com o objetivo de promover a conscientização entre os visitantes. A seguir, apresentamos os resultados
+                obtidos.</span>
+            <div class="graficopeso" style="height: 50vh; width: 50vw">
+                <canvas id="myChartCanvas"></canvas>
+            </div>
+        </div>
+
         <div class="calc" id="calcscroll">
 
             <h1>Calculadoras</h1>
@@ -122,7 +134,8 @@
 
             <div class="descCalc">
 
-                <span style="text-align: justify;">O IMC (Índice de Massa Corporal) é uma medida usada para avaliar se uma pessoa está dentro de um
+                <span style="text-align: justify;">O IMC (Índice de Massa Corporal) é uma medida usada para avaliar se
+                    uma pessoa está dentro de um
                     peso
                     considerado saudável em relação à sua altura. Ele é calculado dividindo o peso (em quilogramas) pela
                     altura (em metros) ao quadrado. Embora o IMC seja amplamente utilizado, ele não leva em consideração
@@ -135,15 +148,19 @@
 
         </div>
 
-        
+
         <div class="container">
 
             <div class="descCalc">
 
-                <span style="text-align: justify;">A Taxa Metabólica Basal (TMB) é a quantidade de energia (calorias) que o corpo precisa para realizar suas
-                    funções básicas enquanto está em repouso. Essas funções incluem respiração, circulação sanguínea, regulação
-                    da temperatura corporal, funcionamento dos órgãos e manutenção das células. Em outras palavras, a TMB
-                    representa a quantidade mínima de calorias que o corpo gasta para se manter vivo e funcional, sem incluir
+                <span style="text-align: justify;">A Taxa Metabólica Basal (TMB) é a quantidade de energia (calorias)
+                    que o corpo precisa para realizar suas
+                    funções básicas enquanto está em repouso. Essas funções incluem respiração, circulação sanguínea,
+                    regulação
+                    da temperatura corporal, funcionamento dos órgãos e manutenção das células. Em outras palavras, a
+                    TMB
+                    representa a quantidade mínima de calorias que o corpo gasta para se manter vivo e funcional, sem
+                    incluir
                     atividades físicas ou digestão de alimentos.</span>
 
             </div>
@@ -169,7 +186,11 @@
 
             <div class="descCalc">
 
-                <span style="text-align: justify;">Uma ingestão hídrica adequada é fundamental para o corpo e traz inúmeras vantagens para o bom funcionamento do organismo. A água desempenha papéis essenciais nos processos biológicos, regulando a temperatura corporal, facilitando o transporte de nutrientes, e promovendo a circulação sanguínea. Ela também auxilia na digestão e no processo de absorção de vitaminas e minerais, que são fundamentais para a saúde.</span>
+                <span style="text-align: justify;">Uma ingestão hídrica adequada é fundamental para o corpo e traz
+                    inúmeras vantagens para o bom funcionamento do organismo. A água desempenha papéis essenciais nos
+                    processos biológicos, regulando a temperatura corporal, facilitando o transporte de nutrientes, e
+                    promovendo a circulação sanguínea. Ela também auxilia na digestão e no processo de absorção de
+                    vitaminas e minerais, que são fundamentais para a saúde.</span>
 
             </div>
 
@@ -194,14 +215,16 @@
 
                 <div class="redes">
 
-                    <a href="https://www.linkedin.com/in/jo%C3%A3o-gabriel-carvalho-ribeiro-37b47125a/"> <button> <img src="./assets/linkedin.png" alt=""> Linkedin </button> </a>
-                    <a href="https://github.com/joaogcr"> <button> <img src="./assets/github.png" alt=""> GitHub </button> </a>
+                    <a href="https://www.linkedin.com/in/jo%C3%A3o-gabriel-carvalho-ribeiro-37b47125a/"> <button> <img
+                                src="./assets/linkedin.png" alt=""> Linkedin </button> </a>
+                    <a href="https://github.com/joaogcr"> <button> <img src="./assets/github.png" alt=""> GitHub
+                        </button> </a>
 
                 </div>
 
                 <div class="descricaosobremim">
 
-                    <span >Meu nome é João Gabriel, tenho 19 anos e sou estudante de Ciência da Computação na São Paulo
+                    <span>Meu nome é João Gabriel, tenho 19 anos e sou estudante de Ciência da Computação na São Paulo
                         Tech School (SPTech). Minha paixão por tecnologia começou cedo: formado como Técnico em
                         Mecatrônica, tive meus primeiros contatos com programação e logo me interessei profundamente
                         pela área, levando-me a buscar um Bacharelado no segmento.
@@ -229,3 +252,146 @@
 </body>
 
 </html>
+
+<script>
+    function obterDadosGrafico() {
+
+        fetch(`http://localhost:3333/index/ultimas/${sessionStorage.ID_USUARIO}`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idUsuario);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGrafico(resposta, idUsuario) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Peso',
+                data: [],
+                fill: false,
+                backgroundColor: "#519758",
+                borderColor: "#519758",
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.dtPeso);
+            dados.datasets[0].data.push(registro.peso);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        const maxY = parseInt(Math.max(...dados.datasets[0].data) + 10);
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                        max: maxY
+                    },
+                },
+            },
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChartCanvas`),
+            config
+        );
+
+        setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
+    }
+
+    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // buscando a última medida inserida em tabela contendo as capturas, 
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function atualizarGrafico(idUsuario, dados, myChart) {
+
+        fetch(`/index/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+ 
+                    obterDadosGrafico(idUsuario);
+                    // alertar(novoRegistro, idUsuario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${idUsuario}`)
+                    avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].peso); // incluir uma nova medida de umidade
+
+                        myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+</script>

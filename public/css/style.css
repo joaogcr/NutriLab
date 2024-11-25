@@ -145,7 +145,27 @@ body {
     color: #fff;
     font-size: 25px;
     text-align: center;
-    width: 55%;
+    width: 63%;
+    font-weight: lighter;
+}
+
+.pesquisa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pesquisa h1 {
+    color: #fff;
+    font-size: 70px;
+}
+
+.pesquisa span {
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+    width: 63%;
     font-weight: lighter;
 }
 

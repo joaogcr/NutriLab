@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NutriLab</title>
+    <link rel="icon" href="./assets/2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logonavbar">
+            <img src="./assets/2.png" alt="" /> <span>NutriLab</span>
+        </div>
+
+        <div class="itens">
+            <a href="./imc.html"><span>IMC</span></a>
+            <a href="./tmb.html"><span>TMB</span></a>
+            <a href="./ingestaoagua.html"><span>Ingestão Hídrica</span></a>
+        </div>
+
+        <div class="botoes">
+            <div class="botao2">
+                <button onclick="login()">
+                    <a href="./perfil.html"><span>Perfil</span></a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
+
+    <div class="alinhar">
+        <div class="calculadorafixa" style="width: 80%;">
+            <h1>Pesquisa</h1>
+            <span>Para contribuir com os resultados exibidos em nossa página home, responda as seguintes questões:</span>
+            <div class="containerlec" style="width: 80%;">
+                <div class="inputsimc">
+                    <span>Você pratica atividades físicas regularmente?</span>
+                    <select name="" id="slt_atividade">
+                        <option value="#">Selecione um</option>
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                    </select>
+
+                    <span>Você possui uma alimentação saudável e ideal para seus objetivos?</span>
+                    <select name="" id="slt_alimentacao">
+                        <option value="#">Selecione um</option>
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                    </select>
+
+                    <span>Você acha que possui consciência corporal?</span>
+                    <select name="" id="slt_consciencia">
+                        <option value="#">Selecione um</option>
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                    </select>
+
+                    <button style="cursor: pointer;" class="botaocadastro" onclick="responder()"> Enviar Respostas </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <img src="./assets/2.png" alt="" style="width: 100px" />
+            <span> © 2024 NutriLab All Rights Reserved </span>
+          </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function responder() {
+        var atividadeVar = Number(slt_atividade.value)
+        var conscienciaVar = Number(slt_consciencia.value)
+        var alimentacaoVar = Number(slt_alimentacao.value)
+        var idVar = sessionStorage.ID_USUARIO
+
+        fetch("/pesquisa/registrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            atividadeServer: atividadeVar,
+            conscienciaServer: conscienciaVar,
+            alimentacaoServer: alimentacaoVar,
+            idServer: idVar
+          }),
+        })
+          .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+              cardErro.style.display = "block";
+
+              mensagem_erro.innerHTML = `<img src="./assets/1.png" alt=""> <br> Obrigado por responder, respostas registradas.`;
+
+              setTimeout(() => {
+                window.location = "pesquisa.html";
+              }, "2000");
+
+              limparFormulario();
+              finalizarAguardar();
+            } else {
+              throw "!";
+            }
+          })
+          .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+          });
+
+        return false;
+      }
+    
+
+      function sumirMensagem() {
+        cardErro.style.display = "none";
+      }
+    
+</script>
