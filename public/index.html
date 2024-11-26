@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="obterDadosGrafico(); obterDadosKpi()">
 
     <div class="navbar">
 
@@ -96,14 +96,40 @@
         </div>
 
         <div class="pesquisa" id="div_pesquisa">
-            <h1>Resultados da pesquisa</h1>
-            <span style="text-align: justify;">Ao se cadastrar no site, o usuário é convidado a responder uma pesquisa,
-                com o objetivo de promover a conscientização entre os visitantes. A seguir, apresentamos os resultados
-                obtidos.</span>
-            <div class="graficopeso" style="height: 50vh; width: 50vw">
-                <canvas id="myChartCanvas"></canvas>
+            <div style="height: 700px;" class="calc">
+                <h1>Resultados da pesquisa</h1>
+                <span class="descpesquisa" style="text-align: justify;">
+                    Ao se cadastrar no site, o usuário é convidado a responder uma pesquisa,
+                    com o objetivo de promover a conscientização entre os visitantes. A seguir, apresentamos os
+                    resultados
+                    obtidos.
+                </span>
+                <div class="div_pesquisa">
+                    <div class="kpis" style="width: 100%; text-align: center;">
+                        <div class="consciencia">
+                            <span>Consciência Corporal (%) </span><br> <br>
+                            <span class="numerokpipesquisa" style="font-size: 40px;" id="porc_consciencia">12</span> %
+                        </div>
+                        <div class="atividade">
+                            <span>Atividade Física (%) </span><br> <br>
+                            <span class="numerokpipesquisa" style="font-size: 40px;" id="porc_atividade">12</span> %
+                        </div>
+                        <div class="alimentacao">
+                            <span>Alimentação Saudável (%) </span><br> <br>
+                            <span class="numerokpipesquisa" style="font-size: 40px;" id="porc_alimentacao">12</span> %
+                        </div>
+                        <div class="totalusuarios">
+                            <span>Total de respostas:</span> <br> <br>
+                            <span class="numerokpipesquisa" style="font-size: 40px;" id="total_usuarios">12</span>
+                        </div>
+                    </div>
+                    <div class="graficopesquisa" style="height: 57vh; width: 57vw">
+                        <canvas id="myChartCanvas"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
+
 
         <div class="calc" id="calcscroll">
 
@@ -118,7 +144,8 @@
                 monitorar a ingestão de nutrientes e calorias, ajudando a ajustar a alimentação de acordo com metas
                 específicas. <br> <br>
 
-                Efetue o Login no site para utilizar as calculadoras.
+                <h1 style="font-size: 30px; text-align: center;">Efetue o Login no site para utilizar as calculadoras
+                </h1>
             </span>
 
         </div>
@@ -254,6 +281,7 @@
 </html>
 
 <script>
+
     function obterDadosGrafico() {
 
         fetch(`http://localhost:3333/index/ultimas/${sessionStorage.ID_USUARIO}`).then(function (response) {
@@ -262,7 +290,7 @@
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idUsuario);
+                    plotarGrafico(resposta);
 
                 });
             } else {
@@ -275,22 +303,32 @@
             });
     }
 
-    function plotarGrafico(resposta, idUsuario) {
+    function plotarGrafico(resposta) {
 
         console.log('iniciando plotagem do gráfico...');
 
         // Criando estrutura para plotar gráfico - labels
         let labels = [];
+        let simData = [];
+        let naoData = [];
 
         // Criando estrutura para plotar gráfico - dados
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'Peso',
-                data: [],
+                label: 'Sim',
+                data: simData,
                 fill: false,
                 backgroundColor: "#519758",
                 borderColor: "#519758",
+                tension: 0.1
+            },
+            {
+                label: 'Não',
+                data: naoData,
+                fill: false,
+                backgroundColor: "grey",
+                borderColor: "grey",
                 tension: 0.1
             }]
         };
@@ -302,8 +340,9 @@
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro.dtPeso);
-            dados.datasets[0].data.push(registro.peso);
+            labels.push(registro.categoria);
+            simData.push(registro.sim);
+            naoData.push(registro.nao);
         }
 
         console.log('----------------------------------------------')
@@ -318,7 +357,7 @@
 
         // Criando estrutura para plotar gráfico - config
         const config = {
-            type: 'line',
+            type: 'bar',
             data: dados,
             options: {
                 scales: {
@@ -336,7 +375,7 @@
             config
         );
 
-        setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
+        setTimeout(() => atualizarGrafico(dados, myChart), 2000);
     }
 
     // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
@@ -344,12 +383,12 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idUsuario, dados, myChart) {
+    function atualizarGrafico(dados, myChart) {
 
         fetch(`/index/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
- 
+
                     obterDadosGrafico(idUsuario);
                     // alertar(novoRegistro, idUsuario);
                     console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
@@ -393,5 +432,69 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
+    }
+
+    function obterDadosKpi() {
+
+        fetch(`http://localhost:3333/kpis/dadoskpi7/${sessionStorage.ID_USUARIO}`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    porc_consciencia.innerHTML = `${resposta[0].proporcao}`
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+            });
+
+        fetch(`http://localhost:3333/kpis/dadoskpi8/${sessionStorage.ID_USUARIO}`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    porc_atividade.innerHTML = `${resposta[0].proporcao}`
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+            });
+
+        fetch(`http://localhost:3333/kpis/dadoskpi9/${sessionStorage.ID_USUARIO}`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    porc_alimentacao.innerHTML = `${resposta[0].proporcao}`
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+            });
+
+        fetch(`http://localhost:3333/kpis/dadoskpi10/${sessionStorage.ID_USUARIO}`).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    total_usuarios.innerHTML = `${resposta[0].total_usuarios}`
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ kpi: ${error.message}`);
+            });
     }
 </script>

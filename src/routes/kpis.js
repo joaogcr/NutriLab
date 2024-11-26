@@ -27,4 +27,20 @@ router.get("/dadoskpi6/:idUsuario", function (req, res) {
     kpisController.buscarUltimasMedidasKpi6(req, res);
 });
 
+router.get("/dadoskpi7/:idUsuario", function (req, res) {
+    kpisController.buscarUltimasMedidasKpi7(req, res);
+});
+
+router.get("/dadoskpi8/:idUsuario", function (req, res) {
+    kpisController.buscarUltimasMedidasKpi8(req, res);
+});
+
+router.get("/dadoskpi9/:idUsuario", function (req, res) {
+    kpisController.buscarUltimasMedidasKpi9(req, res);
+});
+
+router.get("/dadoskpi10/:idUsuario", function (req, res) {
+    kpisController.buscarUltimasMedidasKpi10(req, res);
+});
+
 module.exports = router;

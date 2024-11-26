@@ -204,6 +204,142 @@ function buscarMedidasEmTempoRealKpi6(req, res) {
     });
 }
 
+function buscarUltimasMedidasKpi7(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarUltimasMedidasKpi7(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealKpi7(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarMedidasEmTempoRealKpi7(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarUltimasMedidasKpi8(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarUltimasMedidasKpi8(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealKpi8(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarMedidasEmTempoRealKpi8(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarUltimasMedidasKpi9(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarUltimasMedidasKpi9(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealKpi9(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarMedidasEmTempoRealKpi9(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarUltimasMedidasKpi10(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarUltimasMedidasKpi10(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealKpi10(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    kpisModel.buscarMedidasEmTempoRealKpi10(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     buscarUltimasMedidasKpi1,
     buscarMedidasEmTempoRealKpi1,
@@ -216,5 +352,13 @@ module.exports = {
     buscarUltimasMedidasKpi5,
     buscarMedidasEmTempoRealKpi5,
     buscarUltimasMedidasKpi6,
-    buscarMedidasEmTempoRealKpi6
+    buscarMedidasEmTempoRealKpi6,
+    buscarUltimasMedidasKpi7,
+    buscarMedidasEmTempoRealKpi7,
+    buscarUltimasMedidasKpi8,
+    buscarMedidasEmTempoRealKpi8,
+    buscarUltimasMedidasKpi9,
+    buscarMedidasEmTempoRealKpi9,
+    buscarUltimasMedidasKpi10,
+    buscarMedidasEmTempoRealKpi10,
 }

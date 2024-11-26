@@ -161,7 +161,7 @@ body {
     font-size: 70px;
 }
 
-.pesquisa span {
+.pesquisa .descpesquisa span {
     color: #fff;
     font-size: 25px;
     text-align: center;
@@ -1051,7 +1051,62 @@ html {
     font-size: 20px;
 }
 
+.kpis .consciencia{
+    background-color: #519758;
+    color: #fff;
+    padding: 20px;
+    width: 20%;
+    height: 60%;
+    font-size: 20px;
+    border-radius: 30px;
+}
+
+.kpis .alimentacao{
+    background-color: #519758;
+    border-radius: 30px;
+    padding: 20px;
+    width: 20%;
+    height: 60%;
+    color: #fff;
+    font-size: 20px;
+}
+
+.kpis .atividade{
+    border-radius: 30px;
+    background-color: #519758;
+    padding: 20px;
+    width: 20%;
+    height: 60%;
+    color: #fff;
+    font-size: 20px;
+}
+
+.kpis .totalusuarios {
+    border-radius: 30px;
+    background-color: #519758;
+    padding: 20px;
+    width: 20%;
+    height: 60%;
+    color: #fff;
+    font-size: 20px;
+}
+
+.numerokpipesquisa {
+    font-size: 40px;
+    font-weight: 800;
+}
+
 .numerokpi {
     font-size: 40px;
     font-weight: 800;
+}
+
+.div_pesquisa {
+    display: flex;
+    flex-direction: column;
+}
+
+.div_pesquisa span {
+    color: #fff;
+    font-size: 20px;
 }

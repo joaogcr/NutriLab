@@ -142,19 +142,113 @@ function buscarMedidasEmTempoRealKpi6(idUsuario) {
 
     var instrucaoSql = `
     SELECT CASE
-    WHEN imc IS NULL THEN 'N/A'
-	WHEN imc < 18.5 THEN 'Abaixo do Peso'
-    WHEN imc BETWEEN 18.5 AND 24.9 THEN 'Peso Normal'
-    WHEN imc BETWEEN 25 AND 29.9 THEN 'Sobrepeso'
-    WHEN imc BETWEEN 30 AND 34.9 THEN 'Obesidade I'
-    WHEN imc BETWEEN 35 AND 39.9 THEN 'Obesidade II'
-    WHEN imc >= 40 THEN 'Obesidade III'
+        WHEN imc IS NULL THEN 'N/A'
+	    WHEN imc < 18.5 THEN 'Abaixo do Peso'
+        WHEN imc BETWEEN 18.5 AND 24.9 THEN 'Peso Normal'
+        WHEN imc BETWEEN 25 AND 29.9 THEN 'Sobrepeso'
+        WHEN imc BETWEEN 30 AND 34.9 THEN 'Obesidade I'
+        WHEN imc BETWEEN 35 AND 39.9 THEN 'Obesidade II'
+        WHEN imc >= 40 THEN 'Obesidade III'
     ELSE 'N/A'
     END AS classificacaoImc
     FROM Imc
     WHERE fkUsuario = ${idUsuario}
     ORDER BY idImc DESC LIMIT 1;
     `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasKpi7() {
+
+    var instrucaoSql = 
+    `
+    SELECT 
+        TRUNCATE((COUNT(CASE WHEN consciencia = 1 THEN 1 END) * 100) / COUNT(consciencia), 0) AS proporcao
+    FROM pesquisa;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealKpi7() {
+
+    var instrucaoSql = 
+    `
+    SELECT 
+        TRUNCATE((COUNT(CASE WHEN consciencia = 1 THEN 1 END) * 100) / COUNT(consciencia), 0) AS proporcao
+    FROM pesquisa;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasKpi8() {
+
+    var instrucaoSql = 
+    `
+    SELECT 
+        TRUNCATE((COUNT(CASE WHEN atividade = 1 THEN 1 END) * 100) / COUNT(atividade), 0) AS proporcao
+    FROM pesquisa;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealKpi8() {
+
+    var instrucaoSql = 
+    `
+    SELECT 
+        TRUNCATE((COUNT(CASE WHEN atividade = 1 THEN 1 END) * 100) / COUNT(atividade), 0) AS proporcao
+    FROM pesquisa;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasKpi9() {
+
+    var instrucaoSql =
+    `
+    SELECT 
+        TRUNCATE((COUNT(CASE WHEN alimentacao = 1 THEN 1 END) * 100) / COUNT(alimentacao), 0) AS proporcao
+    FROM pesquisa;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealKpi9() {
+
+    var instrucaoSql = 
+    `
+    SELECT 
+        TRUNCATE((COUNT(CASE WHEN alimentacao = 1 THEN 1 END) * 100) / COUNT(alimentacao), 0) AS proporcao
+    FROM pesquisa;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasKpi10() {
+
+    var instrucaoSql = `SELECT COUNT(fkUsuario) AS total_usuarios FROM pesquisa;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealKpi10() {
+
+    var instrucaoSql = `SELECT COUNT(fkUsuario) AS total_usuarios FROM pesquisa;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -172,5 +266,14 @@ module.exports = {
     buscarUltimasMedidasKpi5,
     buscarMedidasEmTempoRealKpi5,
     buscarUltimasMedidasKpi6,
-    buscarMedidasEmTempoRealKpi6
+    buscarMedidasEmTempoRealKpi6,
+    buscarUltimasMedidasKpi7,
+    buscarMedidasEmTempoRealKpi7,
+    buscarUltimasMedidasKpi8,
+    buscarMedidasEmTempoRealKpi8,
+    buscarUltimasMedidasKpi9,
+    buscarMedidasEmTempoRealKpi9,
+    buscarUltimasMedidasKpi10,
+    buscarMedidasEmTempoRealKpi10,
+    
 }
